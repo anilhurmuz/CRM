@@ -1,0 +1,139 @@
+.width-150{
+    width:150px;
+}
+
+.width-200{
+    width:200px;
+}
+
+.width-300{
+    width:300px;
+}
+
+.right{
+    float: right;
+}
+
+.btn-add-margin-left{
+    margin-left: 50%;
+    width: 50%;
+}
+.btn-kisi-islem-margin-left{
+    margin-left: 60%;
+}
+.btn-mus-adres-add-margin-left{
+    margin-left: 68%;
+    width: 50%;
+}
+.btn-kisi-add-margin-left{
+    margin-left: 235%;
+    width: 50%;
+}
+
+.btn-center{
+    align-self: center;
+}
+
+.custom-label{
+    color: #002a80;
+    padding-left: 10px;
+    padding-top: 5px;
+}
+.btn-success-green{
+    background-color: #78CD51;
+}
+.tab-bg-dark-navy-grey {
+    background: #00A8B3;
+}
+.listele-table{
+    margin-top: 50px;
+}
+.search-i-font{
+    font-family: "Yu Gothic UI Semibold";
+    font-size: medium;
+    color: #00a8b3;
+}
+.search-sub-header-font{
+    font-family: "Yu Gothic UI Semibold";
+    font-size: small;
+    color: black;
+    margin-left: 5px;
+}
+
+.search-panel-header{
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    background-color: #78CD51;
+}
+.search-panel-background{
+    background-color: #E1E1E1;
+}
+.search-subdiv-background{
+    background-color: whitesmoke;
+}
+.search-fa{
+
+    left: auto;
+    right: 5px;
+
+
+}
+.search-btn-margin{
+    margin-left: 15px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    width: 70px;
+    height: 30px;
+
+}
+
+.custom-modal-content {
+    width: 1500px;
+    position: relative;
+    background-color: #ffffff;
+    border: 1px solid #999999;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    background-clip: padding-box;
+    outline: none;
+}
+
+.btn-li-close{
+    margin-left: 10px;
+}
+
+
+.heading-li-span{
+    margin-left: 80%;
+    position: static;
+}
+
+.heading-span{
+    font-family: "Yu Gothic UI Semibold";
+    font-size: 20px;
+    color: white;
+}
+
+.color-red {
+    color: #84040F;
+}
+
+.col-lg-3-30{
+    width: 30%;
+}
+.margin-left-100{
+    padding-left: 100px;
+    padding-right: 10px;
+}
+.margin-left-15{
+    margin-left: 15%;
+}
+.margin-top-15{
+    margin-left: 15%;
+}
+
+
+
