@@ -1,8 +1,4 @@
-<li class="" id="li_kisi_güncelle" style="display: none;">
-    <a data-toggle="tab" href="#div_kisi_güncelle" id="a_kisi_güncelle">Düzenle</a>
-</li>
-<div id="div_kisi_güncelle" class="tab-pane panel-body">
-    <form name="form_musteri_guncelle" id="form_musteri_guncelle" action="{{Request::root()}}/crm/kisi_yonetimi/update"
+ <form name="form_musteri_guncelle" id="form_musteri_guncelle" action="{{Request::root()}}/crm/kisi_yonetimi/update"
           class="form-horizontal tasi-form center-block" method="post">
         <input type="hidden" name="_token" id="my_token" value="<?= csrf_token();?>">
         <input type="hidden" name="xcmpcode" id="xcmpcode" value="{!! $xcmpcode !!}">
@@ -45,7 +41,9 @@
                         <select name="status" id="kisi_ekle_account_contact_status"
                                 class="form-control input-sm m-bot15"
                                 style="width:200px; float: left;">
-
+                            <option value="" disabled selected>Seçiniz</option>
+                            <option value="Çalışan">Çalışan</option>
+                            <option value="Ayrılmış">Ayrılmış</option>
                         </select>
 
                     </div>
@@ -128,7 +126,10 @@
                         <select name="bulletin" id="kisi_ekle_contact_bulletin"
                                 class="form-control input-sm m-bot15"
                                 style="width:200px; float: left;">
-
+                            <option value="" disabled selected>Seçiniz</option>
+                            <option value="evet">Evet</option>
+                            <option value="hayır">Hayır</option>
+                            <option value="reddetti">Kişi Reddetti</option>
                         </select>
 
                     </div>
@@ -159,50 +160,3 @@
 
         </div>
     </form>
-
-    <!-- Güncelle Alt Tablosu Başlangıcı
-
-    <section class="panel" style="margin-top: 50px">
-        <header class="panel-heading tab-bg-dark-navy-grey ">
-            <ul class="nav nav-tabs bold">
-                <li class="active">
-                    <a data-toggle="tab" href="#iletişim">İletişim</a>
-                </li>
-                <li class="">
-                    <a data-toggle="tab" href="#kişiler">Kişiler</a>
-                </li>
-                <li class="">
-                    <a data-toggle="tab" href="#satışfırsatları">Satış Fırsatları</a>
-                </li>
-                <li class="">
-                    <a data-toggle="tab" href="#sözleşmeler">Sözleşmeler</a>
-                </li>
-            </ul>
-        </header>
-        <div class="panel-body">
-            <div class="tab-content">
-                <div id="iletişim" class="tab-pane active">
-
-                    <table id="güncelle_iletişim_tablo" width="100%">
-
-                    </table>
-
-                </div>
-                <div id="kişiler" class="tab-pane">
-
-                    <table id="güncelle_kişiler_tablo" width="100%">
-
-                    </table>
-
-                </div>
-                <div id="satışfırsatları" class="tab-pane"></div>
-                <div id="sözleşmeler" class="tab-pane"></div>
-            </div>
-        </div>
-    </section>
-
-     Güncelle Alt Tablosu Bitişi
-
-    -->
-
-</div>
