@@ -70,15 +70,19 @@ function showguncelle(rowData){
         type: 'POST',
         data: {'data':rowData['id'],'_token':my_token},
         success:function(data){
+            var id = rowData['id'];
+            //assigns id to the related modals
+            $('.accId').val(id);
             //brings the Guncelle tab.
+
             createGuncelleTab(rowData['id'],rowData['name'],'dynamicTabContent','dynamicTabList',data);
             //fills the Guncelle form.
-            $('#update-' + rowData['id'] + ' #guncelle_acc_id').val(rowData.id);
-            $('#update-' + rowData['id'] + ' #guncelle_acc_name').val(rowData.name);
-            $('#update-' + rowData['id'] + ' #guncelle_acc_industry').val(rowData.industry);
-            $('#update-' + rowData['id'] + ' #guncelle_acc_status').val(rowData.status);
-            $('#update-' + rowData['id'] + ' #guncelle_acc_title').val(rowData.title);
-            $('#update-' + rowData['id'] + ' #guncelle_acc_type').val(rowData.type);
+            $('#update-' + id + ' #guncelle_acc_id').val(rowData.id);
+            $('#update-' + id + ' #guncelle_acc_name').val(rowData.name);
+            $('#update-' + id + ' #guncelle_acc_industry').val(rowData.industry);
+            $('#update-' + id + ' #guncelle_acc_status').val(rowData.status);
+            $('#update-' + id + ' #guncelle_acc_title').val(rowData.title);
+            $('#update-' + id + ' #guncelle_acc_type').val(rowData.type);
         },
         error: function () {
             alert('ajax error!');
@@ -111,7 +115,7 @@ function insertDataToListe(dataset) {
             { title: "Müşteri Kısa Adı", data:"name" },
             { title: "Müşteri Ünvanı", data:"title" },
             { title: "Durumu", data:"status" },
-            { title: "Sektörü.", data:"industry" },
+            { title: "Sektörü", data:"industry" },
             { title: "Tipi", data:"type" },
             {title:'İşlemler', defaultContent:"<button class='btn btn-primary btn-xs btn-tablo-guncelle'><i class='fa fa-pencil'>  Güncelle</i>" +
             "</button><button class='btn btn-danger btn-xs btn-tablo-sil' data-toggle='modal' href='#musteri_modal_sil'><i class='fa fa-trash-o '>  Sil</i></button>"}
@@ -173,7 +177,6 @@ function insertDataToListe(dataset) {
 }
 
 $(document).ready(function() {
-
 
 
 

@@ -3,10 +3,11 @@
 use App\Account;
 use App\Accounts_Contacts;
 use App\Contact;
+use App\Info;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
+use DB;
 
 class ContactController extends Controller {
 
@@ -17,10 +18,16 @@ class ContactController extends Controller {
 	 */
 	public function index()
 	{
-		$contactData = Contact::all();
-		$accountContactData = Accounts_Contacts::all();
+		$sql = "select c.id,c.name, c.surname, a.status, a.title, a.xcmpcode, i.phone1, i.phone2 from contacts c
+		left outer join accounts_contacts a on a.contactid = c.id
+		left outer join info i on i.parentid=c.id and i.parenttype='contact'
+		UNION
+		select l.id,l.name, l.surname, l.status, l.title, l.xcmpcode, i.phone1, i.phone2 from leads l
+		left outer join info i on i.parentid = l.id and i.parenttype='lead';";
 
-		return view('pages.crm.kisi_yonetimi')->with('mydata',json_encode($contactData));
+		$record = DB::select($sql);
+
+		return view('pages.crm.kisi_yonetimi.kisi_yonetimi')->with('mydata',json_encode($record));
 	}
 
 	/**
@@ -31,19 +38,18 @@ class ContactController extends Controller {
 
 	public function create(Request $request)
 	{
-
 		$input = $request->all();
-		//to get information of currently added row
+		$accId = $request->get('id');
 		$affected = Contact::create($input);
-
-		//to find id of currently added row in database
 		$id = $affected->getAttribute('id');
-		//to add new attributes to the existing request and save them into Info table.
-		$request->request->add(['parentid'=>$id,'parenttype'=>'contact']);
+		$request->request->add(['accountid'=>$accId,'contactid'=>$id]);
+		$input = $request->all();
+		Accounts_Contacts::create($input);
+		$request->request->add(['parentid'=>$id, 'parenttype'=>'contact']);
 		$input = $request->all();
 		Info::create($input);
 
-		return redirect('crm/kisi_yonetimi');
+		return redirect('crm/musteri_yonetimi');
 	}
 
 	/**
@@ -97,7 +103,12 @@ class ContactController extends Controller {
 	 */
 	public function destroy(Request $request)
 	{
-		Account::destroy($request->get('id'));
+		$id = $request->get('id');
+		dd($id);
+		Contact::destroy($id);
+		Accounts_Contacts::destroy($id);
+		Info::where('parentid','=',$id)->delete();
+
 	}
 
 }

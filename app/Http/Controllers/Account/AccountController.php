@@ -110,7 +110,7 @@ class AccountController extends Controller {
 	public function update(Request $request)
 	{
 
-		$type = $request->get('type');
+		/*$type = $request->get('type');
 		$input = $request->all();
 		$id = $request->get('id');
 		$currentStatus = Info::find($id);
@@ -135,7 +135,9 @@ class AccountController extends Controller {
 
 		$info = Info::where('parentid','=',$id)->get();
 
-		$info->update($input);
+		$info->update($input);*/
+
+
 
 		return redirect('crm/musteri_yonetimi');
 

@@ -36,11 +36,13 @@ Route::post('crm/musteri_yonetimi/create','Account\AccountController@create');
 Route::post('crm/musteri_yonetimi/update','Account\AccountController@update');
 Route::post('crm/musteri_yonetimi/edit','Account\AccountController@edit');
 Route::post('crm/musteri_yonetimi/delete','Account\AccountController@destroy');
+Route::post('crm/musteri_yonetimi/ekle_kisi','Contact\ContactController@create');
 
 Route::post('crm/musteri_yonetimi/fill_city_county','Account\AccountController@fillCityCountyBoxes');
 
 Route::get('crm/kisi_yonetimi', 'Contact\ContactController@index');
-Route::post('crm/kisi_yonetimi/create','Contact\ContactController@create');
+Route::post('crm/kisi_yonetimi/ekle_kisi','Contact\ContactController@create');
+Route::post('crm/kisi_yonetimi/delete','Contact\ContactController@destroy');
 
 Route::get('crm/{page}','PagesController@index');
 

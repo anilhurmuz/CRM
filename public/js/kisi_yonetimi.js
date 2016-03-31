@@ -61,11 +61,11 @@ function insertDataToListe(dataset) {
             { title: "Soyadı", data:"surname" },
             { title: "Durumu", data:"status" },
             { title: "Ünvanı", data:"title" },
-            { title: "Firması", data:"account" },
+            { title: "Firması", data:"xcmpcode" },
             { title: "İş Telefonu", data:"phone1" },
             { title: "Cep Telefonu", data:"phone2" },
             { title:'İşlemler', defaultContent:"<button onclick='show_kisi_guncelle()' class='btn btn-primary btn-xs btn-tablo-guncelle'><i class='fa fa-pencil'>  Güncelle</i>" +
-            "</button><buttoz class='btn btn-danger btn-xs btn-tablo-sil'><i class='fa fa-trash-o '>  Sil</i></buttoz>"}
+            "</button><button class='btn btn-danger btn-xs btn-tablo-sil'><i class='fa fa-trash-o '>  Sil</i></button>"}
         ],
 
         "language": {
@@ -100,14 +100,13 @@ function insertDataToListe(dataset) {
                         data: {'id':data['id'],'_token':my_token},
                         success:function(data){
                             row.remove();
-                            console.log(my_token);
+                        }, error:function() {
+                            alert('AJAX ERROR!');
                         }
                     });
                 }
 
             });
-
-
         }
 
     } );

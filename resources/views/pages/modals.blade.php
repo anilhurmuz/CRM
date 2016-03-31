@@ -41,6 +41,9 @@
                 <div class="tab-pane active panel-body">
                     <form name="form_islem_müsteri_adresi" id="form_islem_müsteri_adresi"
                           class="form-horizontal tasi-form center-block" method="post" >
+                        <input type="hidden" name="_token" id="my_token" value="<?= csrf_token();?>">
+                        <input type="hidden" name="xcmpcode" id="xcmpcode" value="{!! $xcmpcode !!}">
+                        <input type="hidden" class="accId" name="id" value="" >
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="form-group">
@@ -205,8 +208,11 @@
                         Kişi Ekleme
                     </header>
                     <div class="tab-pane active panel-body">
-                        <form name="form_islem_müsteri_adresi" id="form_islem_müsteri_adresi"
+                        <form name="form_islem_müsteri_adresi" action="{{Request::root()}}/crm/musteri_yonetimi/ekle_kisi"
                               class="form-horizontal tasi-form center-block" method="post">
+                            <input type="hidden" name="_token" id="my_token" value="<?= csrf_token();?>">
+                            <input type="hidden" name="xcmpcode" id="xcmpcode" value="{!! $xcmpcode !!}">
+                            <input type="hidden" class="accId" name="id" value="" >
                             <div class="row">
                                 <div class="col-lg-3">
                                     <div class="form-group">
@@ -326,15 +332,14 @@
                                     <div class="form-group">
                                         <label class="col-sm-1 control-label width-150"></label>
                                         <div class="col-sm-5 width-200">
-                                            <button name="btn_islem_musteri_adres_ekle" id="btn_islem_musteri_adres_ekle" type="submit"
-                                                    class="btn-kisi-add-margin-left btn btn-success">Ekle
+                                            <button type="submit" class="btn-kisi-add-margin-left btn btn-success">Ekle
                                             </button>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-1 control-label width-150"></label>
                                         <div class="col-sm-5 width-200">
-                                            <button data-dismiss="modal" class="btn btn-danger btn-kisi-add-margin-left" type="button">Close</button>
+                                            <button data-dismiss="modal" class="btn btn-danger btn-kisi-add-margin-left">Close</button>
                                         </div>
                                     </div>
                                 </div>

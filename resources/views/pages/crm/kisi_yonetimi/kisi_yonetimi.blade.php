@@ -24,6 +24,8 @@
                         <div id="div_kisi_listele" class="tab-pane active panel-body">
                             <form name="form_kisi_listele" id="form_kisi_listele"
                                   class="form-horizontal tasi-form center-block" method="post">
+                                <input type="hidden" name="_token" id="my_token" value="<?= csrf_token();?>">
+                                <input type="hidden" name="xcmpcode" id="xcmpcode" value="{!! $xcmpcode !!}">
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <div class="form-group">
