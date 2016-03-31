@@ -20,11 +20,8 @@ class ContactController extends Controller {
 	public function index()
 	{
 		$sql = "select c.id,c.name, c.surname, a.status, a.title, a.xcmpcode, i.phone1, i.phone2 from contacts c
-		left outer join accounts_contacts a on a.contactid = c.id
-		left outer join info i on i.parentid=c.id and i.parenttype='contact'
-		UNION
-		select l.id,l.name, l.surname, l.status, l.title, l.xcmpcode, i.phone1, i.phone2 from leads l
-		left outer join info i on i.parentid = l.id and i.parenttype='lead';";
+		left outer join accounts_contacts a on a.contactid = c.id and a.deleted_at is NULL
+		left outer join info i on i.parentid=c.id and i.parenttype='contact' and i.deleted_at is NULL where c.deleted_at is NULL;";
 
 		$record = DB::select($sql);
 
@@ -93,7 +90,7 @@ class ContactController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+
 	}
 
 	/**
@@ -107,14 +104,10 @@ class ContactController extends Controller {
 		$id = $request->get('id');
 		Contact::destroy($id);
 		Accounts_Contacts::destroy($id);
-		$type = Info::where('parentid','=',$id)->select('parenttype')->get();
-		if ($type == 'lead') {
-			Lead::destroy($id);
-		} else if ($type == 'contact') {
-			Info::destroy($id);
-		}
-
-		return response()->json(['id'=>$id, 'type'=>$type]);
+		$infoId = Info::where('parentid','=',$id)
+			->where('parenttype','=','contact')
+			->select('id')->get()->first();
+		Info::destroy($infoId['id']);
 	}
 
 }

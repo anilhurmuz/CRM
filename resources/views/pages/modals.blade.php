@@ -248,8 +248,8 @@
                                             <select name="status" id="info_status" class="form-control input-sm m-bot15"
                                                     style="width:200px; float: left;">
                                                 <option value="" disabled selected>Seçiniz</option>
-                                                <option value="aktif">Çalışan</option>
-                                                <option value="pasif">Ayrılmış</option>
+                                                <option value="Çalışan">Çalışan</option>
+                                                <option value="Ayrılmış">Ayrılmış</option>
                                             </select>
 
                                         </div>
