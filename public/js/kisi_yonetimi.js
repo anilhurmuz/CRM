@@ -97,9 +97,10 @@ function insertDataToListe(dataset) {
                     $.ajax({
                         url : window.location + '/delete',
                         type: 'POST',
-                        data: {'id':data['id'],'_token':my_token},
+                        data: {'id':data['id'], '_token':my_token},
                         success:function(data){
                             row.remove();
+                            console.log(data);
                         }, error:function() {
                             alert('AJAX ERROR!');
                         }

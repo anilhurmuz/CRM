@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Http\Response;
 
 class ContactController extends Controller {
 
@@ -104,11 +105,16 @@ class ContactController extends Controller {
 	public function destroy(Request $request)
 	{
 		$id = $request->get('id');
-		dd($id);
 		Contact::destroy($id);
 		Accounts_Contacts::destroy($id);
-		Info::where('parentid','=',$id)->delete();
+		$type = Info::where('parentid','=',$id)->select('parenttype')->get();
+		if ($type == 'lead') {
+			Lead::destroy($id);
+		} else if ($type == 'contact') {
+			Info::destroy($id);
+		}
 
+		return response()->json(['id'=>$id, 'type'=>$type]);
 	}
 
 }
