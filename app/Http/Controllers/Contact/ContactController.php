@@ -77,9 +77,13 @@ class ContactController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit(Request $request)
 	{
-		//
+		$id = $request->get('data');
+		$response = Info::where('parentid','=',$id)->first();
+
+
+		return view('pages.crm.kisi_yonetimi.guncelle')->with('data',$response);
 	}
 
 	/**

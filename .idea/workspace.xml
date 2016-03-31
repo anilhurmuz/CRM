@@ -29,82 +29,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <file leaf-file-name="guncelle.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/pages/crm/musteri_yonetimi/guncelle.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.741936">
-              <caret line="43" column="61" selection-start-line="43" selection-start-column="61" selection-end-line="43" selection-end-column="61" />
+            <state vertical-scroll-proportion="-2.8387096">
+              <caret line="4" column="58" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="58" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ekle.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/pages/crm/musteri_yonetimi/ekle.blade.php">
+      <file leaf-file-name="guncelle.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/pages/crm/kisi_yonetimi/guncelle.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-22.290323">
-              <caret line="112" column="5" selection-start-line="112" selection-start-column="5" selection-end-line="112" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AccountController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Account/AccountController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-106.451614">
-              <caret line="157" column="23" selection-start-line="157" selection-start-column="23" selection-end-line="157" selection-end-column="23" />
+            <state vertical-scroll-proportion="0.02673147">
+              <caret line="1" column="70" selection-start-line="1" selection-start-column="55" selection-end-line="1" selection-end-column="70" />
               <folding>
-                <marker date="1459345499656" expanded="true" signature="2755:2936" placeholder="..." />
-                <marker date="1459345499656" expanded="true" signature="2861:2892" placeholder="..." />
-                <marker date="1459345499656" expanded="true" signature="2927:2932" placeholder="..." />
-                <marker date="1459345499656" expanded="true" signature="2969:3082" placeholder="..." />
+                <marker date="1459419785986" expanded="true" signature="206:8264" placeholder="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="kisi_yonetimi.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/kisi_yonetimi.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="61" column="43" selection-start-line="61" selection-start-column="37" selection-end-line="61" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ContactController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Contact/ContactController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.4838705">
-              <caret line="23" column="129" selection-start-line="23" selection-start-column="129" selection-end-line="23" selection-end-column="129" />
-              <folding>
-                <element signature="e#47#63#0#PHP" expanded="true" />
-                <marker date="1459413967231" expanded="true" signature="294:2343" placeholder="..." />
-                <marker date="1459413967231" expanded="true" signature="394:843" placeholder="{...}" />
-                <marker date="1459413967231" expanded="true" signature="2096:2341" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="modals.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/pages/modals.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.096774">
-              <caret line="240" column="80" selection-start-line="240" selection-start-column="80" selection-end-line="240" selection-end-column="80" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="musteri_yonetim.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/js/musteri_yonetim.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.025761124">
-              <caret line="162" column="69" selection-start-line="0" selection-start-column="0" selection-end-line="304" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -125,9 +67,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/views/n11.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/musteriyonetimi.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/app1.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/home.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/musteri_yonetimi.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/PagesController.php" />
@@ -167,15 +106,18 @@
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/bootstrap/autoload.php" />
         <option value="$PROJECT_DIR$/.env.example" />
-        <option value="$PROJECT_DIR$/resources/views/pages/crm/kisi_yonetimi/kisi_yonetimi.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/resources/views/pages/crm/musteri_yonetimi/ekle.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Account/AccountController.php" />
         <option value="$PROJECT_DIR$/app/Accounts_Contacts.php" />
-        <option value="$PROJECT_DIR$/public/js/kisi_yonetimi.js" />
         <option value="$PROJECT_DIR$/resources/views/pages/modals.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Contact/ContactController.php" />
         <option value="$PROJECT_DIR$/public/js/musteri_yonetim.js" />
+        <option value="$PROJECT_DIR$/resources/views/pages/crm/kisi_yonetimi/ekle.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/crm/kisi_yonetimi/listele.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/crm/kisi_yonetimi/kisi_yonetimi.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Contact/ContactController.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/crm/kisi_yonetimi/guncelle.blade.php" />
+        <option value="$PROJECT_DIR$/public/js/kisi_yonetimi.js" />
+        <option value="$PROJECT_DIR$/app/Http/routes.php" />
       </list>
     </option>
   </component>
@@ -691,7 +633,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19292605" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25348338" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.49569893" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5043011" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -752,40 +694,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="75" selection-start-line="42" selection-start-column="75" selection-end-line="42" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Account/AccountController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1459345499656" expanded="true" signature="2755:2936" placeholder="..." />
-            <marker date="1459345499656" expanded="true" signature="2861:2892" placeholder="..." />
-            <marker date="1459345499656" expanded="true" signature="2927:2932" placeholder="..." />
-            <marker date="1459345499656" expanded="true" signature="2969:3082" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/musteri_yonetim.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/slidebars.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33278146">
@@ -951,6 +864,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="133" column="14" selection-start-line="133" selection-start-column="14" selection-end-line="133" selection-end-column="14" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1017,46 +931,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/crm/kisi_yonetimi/kisi_yonetimi.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.870968">
-          <caret line="27" column="109" selection-start-line="27" selection-start-column="109" selection-end-line="27" selection-end-column="109" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/crm/musteri_yonetimi/musteri_yonetimi.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49588138">
-          <caret line="38" column="11" selection-start-line="38" selection-start-column="10" selection-end-line="38" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/crm/musteri_yonetimi/listele.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33208954">
-          <caret line="187" column="33" selection-start-line="187" selection-start-column="32" selection-end-line="187" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/crm/musteri_yonetimi/guncelle.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.1893204">
-          <caret line="47" column="26" selection-start-line="47" selection-start-column="26" selection-end-line="47" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Contact.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2673147">
           <caret line="12" column="38" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/crm/musteri_yonetimi/ekle.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-22.290323">
-          <caret line="112" column="5" selection-start-line="112" selection-start-column="5" selection-end-line="112" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -1077,18 +955,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Info.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29404616">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/pages/modals.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.096774">
-          <caret line="240" column="80" selection-start-line="240" selection-start-column="80" selection-end-line="240" selection-end-column="80" />
+        <state vertical-scroll-proportion="-0.10692588">
+          <caret line="214" column="83" selection-start-line="214" selection-start-column="27" selection-end-line="214" selection-end-column="83" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/crm/musteri_yonetimi/ekle.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-22.290323">
+          <caret line="112" column="0" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/crm/kisi_yonetimi/ekle.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21385176">
+          <caret line="154" column="5" selection-start-line="154" selection-start-column="5" selection-end-line="154" selection-end-column="5" />
+          <folding>
+            <element signature="e#28#138#0#HTML" expanded="false" />
+            <element signature="e#181#6400#0#HTML" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Account/AccountController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-106.451614">
-          <caret line="157" column="23" selection-start-line="157" selection-start-column="23" selection-end-line="157" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.6148238">
+          <caret line="96" column="33" selection-start-line="96" selection-start-column="33" selection-end-line="96" selection-end-column="33" />
           <folding>
             <marker date="1459345499656" expanded="true" signature="2755:2936" placeholder="..." />
             <marker date="1459345499656" expanded="true" signature="2861:2892" placeholder="..." />
@@ -1098,48 +1003,89 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Info.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/crm/kisi_yonetimi/kisi_yonetimi.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29404616">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        <state vertical-scroll-proportion="-2.7096775">
+          <caret line="8" column="44" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Contact/ContactController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/crm/musteri_yonetimi/listele.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.4838705">
-          <caret line="23" column="129" selection-start-line="23" selection-start-column="129" selection-end-line="23" selection-end-column="129" />
-          <folding>
-            <element signature="e#47#63#0#PHP" expanded="true" />
-            <marker date="1459413967231" expanded="true" signature="294:2343" placeholder="..." />
-            <marker date="1459413967231" expanded="true" signature="394:843" placeholder="{...}" />
-            <marker date="1459413967231" expanded="true" signature="2096:2341" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/kisi_yonetimi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="61" column="43" selection-start-line="61" selection-start-column="37" selection-end-line="61" selection-end-column="43" />
+        <state vertical-scroll-proportion="6.602673">
+          <caret line="247" column="0" selection-start-line="247" selection-start-column="0" selection-end-line="247" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/crm/musteri_yonetimi/musteri_yonetimi.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.741936">
-          <caret line="43" column="61" selection-start-line="43" selection-start-column="61" selection-end-line="43" selection-end-column="61" />
+        <state vertical-scroll-proportion="-7.096774">
+          <caret line="10" column="43" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/crm/kisi_yonetimi/listele.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.08019441">
+          <caret line="3" column="52" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="52" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/musteri_yonetim.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.025761124">
-          <caret line="162" column="69" selection-start-line="0" selection-start-column="0" selection-end-line="304" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.38875878">
+          <caret line="62" column="13" selection-start-line="62" selection-start-column="9" selection-end-line="62" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/kisi_yonetimi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="84" column="90" selection-start-line="84" selection-start-column="90" selection-end-line="84" selection-end-column="90" />
+          <folding>
+            <element signature="n#!!block;n#kisi_searc_toogle#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.076923">
+          <caret line="43" column="43" selection-start-line="43" selection-start-column="43" selection-end-line="43" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Contact/ContactController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-49.677418">
+          <caret line="70" column="10" selection-start-line="70" selection-start-column="10" selection-end-line="70" selection-end-column="10" />
+          <folding>
+            <element signature="e#47#63#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/crm/musteri_yonetimi/guncelle.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.8387096">
+          <caret line="4" column="58" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/crm/kisi_yonetimi/guncelle.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.02673147">
+          <caret line="1" column="70" selection-start-line="1" selection-start-column="55" selection-end-line="1" selection-end-column="70" />
+          <folding>
+            <marker date="1459419785986" expanded="true" signature="206:8264" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>

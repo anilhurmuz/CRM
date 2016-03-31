@@ -2,6 +2,35 @@
 <!--    -->
 
 
+function li_update_close(id){
+    //previousObj = $("#li_update_account-"+id).prev('li');
+    $('#div_kisi_güncelle-'+id+ ", #li_kisi_güncelle-"+id).remove();
+    delete window.openTabs[id];
+    //if(window.openTabs) {previousObj.find('a').click();}
+    //else {$('#listele','a').click(); alert('tablar bitti.');}
+    $('#li_kisi_listele a').click();
+
+}
+
+function createGuncelleTab(id,name,dynamicTabContent,dynamicTabList,htmlData){
+    if(!window.openTabs) {
+        window.openTabs = [];
+    }
+
+    if(!window.openTabs[id]) {
+        window.openTabs[id] = true;
+        var div = "<div id='div_kisi_güncelle-" + id + "' class='tab-pane panel-body'>" + htmlData + "</div>";
+        $('#' + dynamicTabContent).append(div);
+        var list = "<li id='li_kisi_güncelle-" + id + "' style='display: block;'><a data-toggle='tab' href='#div_kisi_güncelle-" + id + "' id='a_kisi_güncelle' style='float: left'>" + name + " - Güncelle " +
+            "       " +
+            "<i onclick='li_update_close(" + id + ")'  class='fa fa-times color-red'></i></a></li>";
+        $('#' + dynamicTabList).append(list);
+    } else {
+        $("#li_kisi_güncelle-" + id + " a ").click();
+    }
+
+}
+
 function kisi_searc_toogle(buton){
 
     if(buton.id == 'btn_kisi_search_name')
@@ -31,17 +60,50 @@ function kisi_searc_toogle(buton){
 
 }
 
-function show_kisi_guncelle(){
-    $("#div_kisi_güncelle").addClass("active");
-    $("#div_kisi_ekle").removeClass("active");
-    $("#div_kisi_listele").removeClass("active");
-    $("#li_kisi_güncelle").addClass("active");
-    document.getElementById('li_kisi_güncelle').style.display='block';
-    $("#li_kisi_listele").removeClass("active");
-    $("#a_kisi_güncelle").attr("aria-expanded","true");
+
+function showguncelle(rowData){
+
+    var my_token = $('[name="csrf-token"]').attr('content');
+
+
+    $.ajax({
+        url : window.location + '/edit',
+        type: 'POST',
+        data: {'data':rowData['id'],'_token':my_token},
+        success:function(data){
+            console.log(data);
+            var id = rowData['id'];
+            //assigns id to the related modals
+            $('.contId').val(id);
+            //brings the Guncelle tab.
+
+            createGuncelleTab(rowData['id'],rowData['name'],'dynamicTabContent','dynamicTabList',data);
+            //fills the Guncelle form.
+            $('#div_kisi_güncelle-' + id + ' .contId').val(rowData.id);
+            $('#div_kisi_güncelle-' + id + ' #kisi_ekle_contact_name').val(rowData.name);
+            $('#div_kisi_güncelle-' + id + ' #kisi_ekle_contact_surname').val(rowData.surname);
+            $('#div_kisi_güncelle-' + id + ' #kisi_ekle_contact_account').val(rowData.xcmpcode);
+            $('#div_kisi_güncelle-' + id + ' #kisi_ekle_account_contact_status').val(rowData.status);
+            $('#div_kisi_güncelle-' + id + ' #kisi_ekle_account_contact_title').val(rowData.title);
+            $('#div_kisi_güncelle-' + id + ' #kisi_ekle_info_phone1').val(rowData.phone1);
+            $('#div_kisi_güncelle-' + id + ' #kisi_ekle_info_phone2').val(rowData.phone2);
+            $('#div_kisi_güncelle-' + id + ' #kisi_ekle_info_facebook').val(rowData.facebook);
+            $('#div_kisi_güncelle-' + id + ' #kisi_ekle_info_twitter').val(rowData.twitter);
+            $('#div_kisi_güncelle-' + id + ' #kisi_ekle_info_linkedin').val(rowData.linkedin);
+            $('#div_kisi_güncelle-' + id + ' #kisi_ekle_contact_bulletin').val(rowData.bulletin);
+            $('#div_kisi_güncelle-' + id + ' #kisi_ekle_info_description').val(rowData.description);
+        },
+        error: function () {
+            alert('ajax error!');
+        }
+    });
+
+
+
+
+
 
 }
-
 
 function insertDataToListe(dataset) {
 
@@ -64,7 +126,7 @@ function insertDataToListe(dataset) {
             { title: "Firması", data:"xcmpcode" },
             { title: "İş Telefonu", data:"phone1" },
             { title: "Cep Telefonu", data:"phone2" },
-            { title:'İşlemler', defaultContent:"<button onclick='show_kisi_guncelle()' class='btn btn-primary btn-xs btn-tablo-guncelle'><i class='fa fa-pencil'>  Güncelle</i>" +
+            { title:'İşlemler', defaultContent:"<button class='btn btn-primary btn-xs btn-tablo-guncelle'><i class='fa fa-pencil'>  Güncelle</i>" +
             "</button><button class='btn btn-danger btn-xs btn-tablo-sil'><i class='fa fa-trash-o '>  Sil</i></button>"}
         ],
 
@@ -91,6 +153,14 @@ function insertDataToListe(dataset) {
         fnCreatedRow:function(row,data,index){
 
             var my_token = $('#my_token').val();
+
+            $(row).find('.btn-tablo-guncelle').on('click',function(){
+                showguncelle(data);
+            });
+
+            $(row).on('dblclick',function(){
+                showguncelle(data);
+            });
 
             $(row).find('.btn-tablo-sil').on('click',function(){
                 if(confirm(data['name']+" isimli kullanıcı silmek istediğinizden emin misiniz?")){
