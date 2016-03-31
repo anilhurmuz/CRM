@@ -325,7 +325,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-1 control-label width-150" style="float: left">Açıklama</label>
                                         <div>
-                                            <textarea name="address" id="info_address" class="form-control" style="width:500px; height: 280px; float: left;"></textarea>
+                                            <textarea name="description" id="info_address" class="form-control" style="width:500px; height: 280px; float: left;"></textarea>
                                         </div>
                                     </div>
 

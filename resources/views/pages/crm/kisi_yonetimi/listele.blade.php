@@ -19,10 +19,8 @@
                         <label class="col-sm-1 control-label width-150">Adı</label>
 
                         <div>
-                            <select name="name" id="kisi_listele_name" class="form-control input-sm m-bot15"
-                                    style="width:200px; float: left;">
-
-                            </select>
+                            <input name="name" id="kisi_listele_name" class="form-control input-sm m-bot15"
+                                    style="width:200px; float: left;" autocomplete="on"/>
                             <button name="btn_kisi_search_name" id="btn_kisi_search_name"
                                     onclick="kisi_searc_toogle(this)" class="btn btn-success" type="button"
                                     style=" height: 30px; "><i
@@ -32,10 +30,8 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label width-150">Soyadı</label>
                         <div>
-                            <select name="surname" id="kisi_listele_surname" class="form-control input-sm m-bot15"
-                                    style="width:200px; float: left;">
-
-                            </select>
+                            <input name="surname" id="kisi_listele_surname" class="form-control input-sm m-bot15"
+                                    style="width:200px; float: left;" autocomplete="on"/>
                             <button name="btn_kisi_search_surname" id="btn_kisi_search_surname"
                                     onclick="kisi_searc_toogle(this)" class="btn btn-success" type="button"
                                     style=" height: 30px; "><i
@@ -75,10 +71,8 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label width-150">Ünvanı</label>
                         <div>
-                            <select name="title" id="kisi_listele_title" class="form-control input-sm m-bot15"
-                                    style="width:200px; float: left;">
-
-                            </select>
+                            <input name="title" id="kisi_listele_title" class="form-control input-sm m-bot15"
+                                    style="width:200px; float: left;" autocomplete="on">
                             <button name="btn_kisi_search_title" id="btn_kisi_search_title"
                                     onclick="kisi_searc_toogle(this)" class="btn btn-success" type="button"
                                     style=" height: 30px; "><i
@@ -89,10 +83,8 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label width-150">İş Telefonu</label>
                         <div>
-                            <select name="phone1" id="kisi_listele_phone1" class="form-control input-sm m-bot15"
-                                    style="width:200px; float: left;">
-
-                            </select>
+                            <input name="phone1" id="kisi_listele_phone1" class="form-control input-sm m-bot15"
+                                    style="width:200px; float: left;" autocomplete="on">
                             <button name="btn_kisi_search_phone1" id="btn_kisi_search_phone1"
                                     onclick="kisi_searc_toogle(this)" class="btn btn-success" type="button"
                                     style=" height: 30px; "><i
@@ -102,10 +94,8 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label width-150">Cep Telefonu</label>
                         <div>
-                            <select name="phone2" id="kisi_listele_phone2" class="form-control input-sm m-bot15"
-                                    style="width:200px; float: left;">
-
-                            </select>
+                            <input name="phone2" id="kisi_listele_phone2" class="form-control input-sm m-bot15"
+                                    style="width:200px; float: left;" autocomplete="on">
                             <button name="btn_kisi_search_phone2" id="btn_kisi_search_phone2"
                                     onclick="kisi_searc_toogle(this)" class="btn btn-success" type="button"
                                     style=" height: 30px; "><i
@@ -121,10 +111,8 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label width-150">Facebook</label>
                         <div>
-                            <select name="facebook" id="kisi_listele_facebook" class="form-control input-sm m-bot15"
-                                    style="width:200px; float: left;">
-
-                            </select>
+                            <input name="facebook" id="kisi_listele_facebook" class="form-control input-sm m-bot15"
+                                    style="width:200px; float: left;" autocomplete="on">
                             <button name="btn_kisi_search_facebook" id="btn_kisi_search_facebook"
                                     onclick="kisi_searc_toogle(this)" class="btn btn-success" type="button"
                                     style=" height: 30px; "><i
@@ -135,10 +123,8 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label width-150">Twitter</label>
                         <div>
-                            <select name="twitter" id="kisi_listele_twitter" class="form-control input-sm m-bot15"
-                                    style="width:200px; float: left;">
-
-                            </select>
+                            <input name="twitter" id="kisi_listele_twitter" class="form-control input-sm m-bot15"
+                                    style="width:200px; float: left;" autocomplete="on">
                             <button name="btn_kisi_search_twitter" id="btn_kisi_search_twitter"
                                     onclick="kisi_searc_toogle(this)" class="btn btn-success" type="button"
                                     style=" height: 30px; "><i
@@ -149,10 +135,8 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label width-150">Linkedin</label>
                         <div>
-                            <select name="linkedin" id="kisi_listele_linkedin" class="form-control input-sm m-bot15"
-                                    style="width:200px; float: left;">
-
-                            </select>
+                            <input name="linkedin" id="kisi_listele_linkedin" class="form-control input-sm m-bot15"
+                                    style="width:200px; float: left;" autocomplete="on">
                             <button name="btn_kisi_search_linkedin" id="btn_islem_contact_linkedin"
                                     onclick="kisi_searc_toogle(this)" class="btn btn-success" type="button"
                                     style=" height: 30px; "><i
@@ -180,7 +164,7 @@
                         <div>
                                                 <textarea name="description" id="kisi_listele_description"
                                                           class="form-control"
-                                                          style="width:400px; height: 200px; float: left;"></textarea>
+                                                          style="width:400px; height: 200px; float: left; resize: none;" ></textarea>
                         </div>
                     </div>
 

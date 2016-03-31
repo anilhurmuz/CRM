@@ -19,7 +19,7 @@ class ContactController extends Controller {
 	 */
 	public function index()
 	{
-		$sql = "select c.id,c.name, c.surname, a.status, a.title, a.xcmpcode, i.phone1, i.phone2 from contacts c
+		$sql = "select c.id,c.name, c.surname, a.status, a.title, a.xcmpcode, i.phone1, i.phone2, i.facebook, i.twitter, i.linkedin, c.description, c.bulletin from contacts c
 		left outer join accounts_contacts a on a.contactid = c.id and a.deleted_at is NULL
 		left outer join info i on i.parentid=c.id and i.parenttype='contact' and i.deleted_at is NULL where c.deleted_at is NULL;";
 
@@ -55,6 +55,17 @@ class ContactController extends Controller {
 	 *
 	 * @return Response
 	 */
+
+	public function autocomplete(Request $request) {
+
+		$key = $request->get('term');
+		dd($key);
+		$names = Contact::where('name','LIKE','%'.$term.'%')->get();
+
+		return view('pages.crm.kisi_yonetimi.listele')
+			->with('result', json_encode($names));
+	}
+
 	public function store()
 	{
 		//
@@ -82,8 +93,11 @@ class ContactController extends Controller {
 		$id = $request->get('data');
 		$response = Info::where('parentid','=',$id)->first();
 
+		$contactInfoFromDatabase = Accounts_Contacts::where('contactid','=',$id)
+			->select('id', 'title', 'xcmpcode')->get();
 
-		return view('pages.crm.kisi_yonetimi.guncelle')->with('data',$response);
+		return view('pages.crm.kisi_yonetimi.guncelle')->with('data',$response)
+			->with('contactInfo', json_encode($contactInfoFromDatabase));
 	}
 
 	/**
@@ -94,7 +108,14 @@ class ContactController extends Controller {
 	 */
 	public function update(Request $request)
 	{
-		
+		$input = $request->all();
+
+		Contact::where('id','=',$input['id'])->update(['name'=>$input['name'], 'surname'=>$input['surname'], 'description'=>$input['description'], 'bulletin'=>$input['bulletin']]);
+		Accounts_Contacts::where('contactid','=',$input['id'])->update(['status'=>$input['status'], 'title'=>$input['title'], 'xcmpcode'=>$input['xcmpcode']]);
+		Info::where('parentid','=',$input['id'])
+			->where('parenttype','=','contact')->update(['phone1'=>$input['phone1'], 'phone2'=>$input['phone2'], 'facebook'=>$input['facebook'], 'twitter'=>$input['twitter'], 'linkedin'=>$input['linkedin']]);
+
+		return redirect('crm/kisi_yonetimi');
 	}
 
 	/**

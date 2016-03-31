@@ -25,9 +25,7 @@ class AccountController extends Controller {
 				order by name";
 
 		$res = DB::select(DB::raw($sql));
-
 		return view('pages.crm.musteri_yonetimi.musteri_yonetimi')->with('mydata',json_encode($res));
-
 	}
 
 	/**
@@ -94,11 +92,22 @@ class AccountController extends Controller {
 	 */
 	public function edit(Request $request)
 	{
+		$sql = "";
 		$id = $request->get('data');
 		$response = Info::where('parentid','=',$id)->first();
+		$type = $response->getAttribute('parenttype');
+
+		//if type is lead, informaitons will be taken from lead table
+		if($type == "lead"){
+			$customer = Lead::find($id);
+		}
+		//if type is account, informaitons will be taken from account table
+		else{
+			$customer = Account::find($id);
+		}
 
 
-		return view('pages.crm.musteri_yonetimi.guncelle')->with('data',$response);
+		return view('pages.crm.musteri_yonetimi.guncelle')->with('infoData',$response)->with('customerInfo',$customer);
 	}
 
 	/**
@@ -110,33 +119,52 @@ class AccountController extends Controller {
 	public function update(Request $request)
 	{
 
-		/*$type = $request->get('type');
+		//getting the current selected type from the interface.
+		$selectedType = $request->get('type');
+		//updating request with new selected type.
+		$request->request->add(['parenttype'=>$selectedType]);
 		$input = $request->all();
+
+		//getting hidden id form field.
 		$id = $request->get('id');
-		$currentStatus = Info::find($id);
-		$parenttype = $currentStatus->get('parenttype');
 
-		if($type == 'potansiyel'){
-			//to get information of currently added row
-			$lead = Lead::find($id);
+		//getting the current Informations of the selected person.
+		$currentRecord = Info::where("parentid","=",$id)->first();
+		//assigning current type stored in the Info table.
+		$parentType = $currentRecord->getAttribute('parenttype');
 
-			if($parenttype == 'lead'){
-				$lead->update($input);
-			}else if($parenttype == 'account'){
 
-			}
+		$isChangedType = ($selectedType == 'musteri' && $parentType == 'lead');
+
+		if($isChangedType){
+			//move the records from Leads to Accounts table
+			Lead::destroy($id);
+			$affected = Account::create($input);
+			//id is changed because the record is moved to another table.
+			$affectedParentId = $affected->getAttribute('id');
+			$lastType = "account";
 		}
-
-		else if($type == 'musteri'){
-			//to get information of currently added row
+		else if(!$isChangedType && $selectedType == 'musteri'){
+			//updating the Accounts table.
 			$account = Account::find($id);
 			$account->update($input);
+			$lastType = "account";
+		}
+		else{
+			//updating the Leads table.
+			$lead = Lead::find($id);
+			$lead->update($input);
+			$lastType = "lead";
 		}
 
-		$info = Info::where('parentid','=',$id)->get();
+		//updating request with correct customer type
+		$request->request->add(['parenttype'=>$lastType]);
+		if(isset($affectedParentId)) {$request->request->add(['parentid'=>$affectedParentId]);}
+		$input = $request->all();
 
-		$info->update($input);*/
-
+		//after all, for all statements, updating the Info table with new inputs.
+		$info = Info::where('parentid','=',$id)->first();
+		$info->update($input);
 
 
 		return redirect('crm/musteri_yonetimi');

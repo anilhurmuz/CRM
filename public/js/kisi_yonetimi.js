@@ -71,12 +71,10 @@ function showguncelle(rowData){
         type: 'POST',
         data: {'data':rowData['id'],'_token':my_token},
         success:function(data){
-            console.log(data);
             var id = rowData['id'];
             //assigns id to the related modals
             $('.contId').val(id);
             //brings the Guncelle tab.
-
             createGuncelleTab(rowData['id'],rowData['name'],'dynamicTabContent','dynamicTabList',data);
             //fills the Guncelle form.
             $('#div_kisi_güncelle-' + id + ' .contId').val(rowData.id);
@@ -170,7 +168,6 @@ function insertDataToListe(dataset) {
                         data: {'id':data['id'], '_token':my_token},
                         success:function(data){
                             row.remove();
-                            console.log(data);
                         }, error:function() {
                             alert('AJAX ERROR!');
                         }
@@ -181,6 +178,57 @@ function insertDataToListe(dataset) {
         }
 
     } );
+}
+
+
+
+
+$(function () {
+$("#kisi_listele_name").autocomplete ({
+    source: "autocomplete",
+    select: function(event, ui) {
+        $('#kisi_listele_name').val(ui.item.value);
+    }
+});
+});
+
+function getContactInfo(dataSet) {
+
+       $('#kisi-update-table').DataTable({
+           data: dataSet,
+           columnDefs: [
+               {
+                   targets: [0],
+                   visible: false,
+                   searchable: false
+               }
+           ],
+           columns: [
+               {data: "id"},
+               {title: "Firma", data: "xcmpcode"},
+               {title: "Ünvanı", data: "title"}
+           ],
+           "language": {
+               "lengthMenu": ' <select>'+
+               '<option value="10">10</option>'+
+               '<option value="30">30</option>'+
+               '<option value="50">50</option>'+
+               '<option value="100">100</option>'+
+               '<option value="200">200</option>'+
+               '<option value="500">500</option>'+
+               '<option value="1000">1000</option>'+
+               '<option value="-1">All</option>'+
+               '</select> Kayıt Görüntüle',
+               "sInfo": "Toplam \_TOTAL\_ sonuç arasından \_START\_ ile \_END\_ arasındaki sonuçlar gösteriliyor.",
+               "paginate": {
+                   "next": "İleri",
+                   "previous": "Geri"
+               },
+               "emptyTable": "Tablo içinde görüntülenecek veri bulunamadı",
+               "sInfoEmpty": "Toplam 0 sonuç arasından 0 ile 0 arasındaki sonuçlar gösteriliyor."
+           }
+       });
+
 }
 
 

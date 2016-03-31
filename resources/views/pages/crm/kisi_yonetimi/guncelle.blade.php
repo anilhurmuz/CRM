@@ -160,3 +160,28 @@
 
         </div>
     </form>
+
+ <section class="panel" style="margin-top: 50px">
+     <header class="panel-heading tab-bg-dark-navy-grey ">
+         <ul class="nav nav-tabs bold">
+             <li class="active">
+                 <a data-toggle="tab" href="#firms">Çalıştığı Firmalar</a>
+             </li>
+         </ul>
+     </header>
+     <div class="panel-body">
+         <div class="tab-content">
+             <div id="firms" class="tab-pane active">
+
+                     <table id="kisi-update-table" class="display" width="100%"></table>
+
+             </div>
+         </div>
+     </div>
+ </section>
+ <script type="text/javascript">
+ $(function () {
+     console.log({!! $contactInfo !!});
+ getContactInfo({!! $contactInfo !!});
+ });
+</script>

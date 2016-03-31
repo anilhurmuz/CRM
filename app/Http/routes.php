@@ -44,7 +44,8 @@ Route::get('crm/kisi_yonetimi', 'Contact\ContactController@index');
 Route::post('crm/kisi_yonetimi/ekle_kisi','Contact\ContactController@create');
 Route::post('crm/kisi_yonetimi/delete','Contact\ContactController@destroy');
 Route::post('crm/kisi_yonetimi/edit','Contact\ContactController@edit');
-Route:post('crm/kisi_yonetimi/update','Contact\ContactController@update');
+Route::post('crm/kisi_yonetimi/update','Contact\ContactController@update');
+Route::get('autocomplete', 'Contact\ContactController@autocomplete');
 
 Route::get('crm/{page}','PagesController@index');
 

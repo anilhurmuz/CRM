@@ -14,7 +14,7 @@ function li_update_close(id){
     $('#update-'+id+ ", #li_update_account-"+id).remove();
     delete window.openTabs[id];
     //if(window.openTabs) {previousObj.find('a').click();}
-   //else {$('#listele','a').click(); alert('tablar bitti.');}
+    //else {$('#listele','a').click(); alert('tablar bitti.');}
     $('#li_listele a').click();
 
 }
@@ -25,7 +25,7 @@ function toogle(buton){
         $("div#search_name").toggle(100);
     else if(buton.id == 'btn_islem_acc_title')
         $("div#search_title").toggle(100);
-    else if(buton.id     == 'btn_islem_acc_status')
+    else if(buton.id == 'btn_islem_acc_status')
         $("div#search_status").toggle(100);
     else if(buton.id == 'btn_islem_acc_industry')
         $("div#search_industry").toggle(100);
@@ -51,8 +51,7 @@ function createGuncelleTab(id,name,dynamicTabContent,dynamicTabList,htmlData){
         var div = "<div id='update-" + id + "' class='tab-pane panel-body'>" + htmlData + "</div>";
         $('#' + dynamicTabContent).append(div);
         var list = "<li id='li_update_account-" + id + "' style='display: block;'><a data-toggle='tab' href='#update-" + id + "' id='a_güncelle' style='float: left'>" + name + " - Güncelle " +
-            "       " +
-            "<i onclick='li_update_close(" + id + ")'  class='fa fa-times color-red'></i></a></li>";
+            "<button onclick='li_update_close(" + id + ")' class='btn-li-close fa fa-times btn-danger'></button></a></li>";
         $('#' + dynamicTabList).append(list);
     } else {
         $("#li_update_account-"+id + " a ").click();
@@ -70,36 +69,18 @@ function showguncelle(rowData){
         type: 'POST',
         data: {'data':rowData['id'],'_token':my_token},
         success:function(data){
-            var id = rowData['id'];
-            //assigns id to the related modals
-            $('.accId').val(id);
             //brings the Guncelle tab.
-
             createGuncelleTab(rowData['id'],rowData['name'],'dynamicTabContent','dynamicTabList',data);
-            //fills the Guncelle form.
-            $('#update-' + id + ' #guncelle_acc_id').val(rowData.id);
-            $('#update-' + id + ' #guncelle_acc_name').val(rowData.name);
-            $('#update-' + id + ' #guncelle_acc_industry').val(rowData.industry);
-            $('#update-' + id + ' #guncelle_acc_status').val(rowData.status);
-            $('#update-' + id + ' #guncelle_acc_title').val(rowData.title);
-            $('#update-' + id + ' #guncelle_acc_type').val(rowData.type);
         },
         error: function () {
             alert('ajax error!');
         }
     });
-
-
-
-
-
-
 }
 
 
+
 function insertDataToListe(dataset) {
-
-
 
     $('#musteri_listele_tablo').DataTable( {
         data: dataset,
@@ -108,6 +89,7 @@ function insertDataToListe(dataset) {
                 targets  :   [0],
                 visible :   false,
                 searchable: false
+
             }
         ],
         columns: [
@@ -115,7 +97,7 @@ function insertDataToListe(dataset) {
             { title: "Müşteri Kısa Adı", data:"name" },
             { title: "Müşteri Ünvanı", data:"title" },
             { title: "Durumu", data:"status" },
-            { title: "Sektörü", data:"industry" },
+            { title: "Sektörü.", data:"industry" },
             { title: "Tipi", data:"type" },
             {title:'İşlemler', defaultContent:"<button class='btn btn-primary btn-xs btn-tablo-guncelle'><i class='fa fa-pencil'>  Güncelle</i>" +
             "</button><button class='btn btn-danger btn-xs btn-tablo-sil' data-toggle='modal' href='#musteri_modal_sil'><i class='fa fa-trash-o '>  Sil</i></button>"}
@@ -177,6 +159,7 @@ function insertDataToListe(dataset) {
 }
 
 $(document).ready(function() {
+
 
 
 
@@ -297,8 +280,3 @@ function onCityChanged(){
         }
     });
 }
-
-
-
-
-
