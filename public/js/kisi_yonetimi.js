@@ -80,7 +80,7 @@ function showguncelle(rowData){
             $('#div_kisi_güncelle-' + id + ' .contId').val(rowData.id);
             $('#div_kisi_güncelle-' + id + ' #kisi_ekle_contact_name').val(rowData.name);
             $('#div_kisi_güncelle-' + id + ' #kisi_ekle_contact_surname').val(rowData.surname);
-            $('#div_kisi_güncelle-' + id + ' #kisi_ekle_contact_account').val(rowData.xcmpcode);
+            $('#div_kisi_güncelle-' + id + ' #kisi_ekle_contact_account').val(rowData.account);
             $('#div_kisi_güncelle-' + id + ' #kisi_ekle_account_contact_status').val(rowData.status);
             $('#div_kisi_güncelle-' + id + ' #kisi_ekle_account_contact_title').val(rowData.title);
             $('#div_kisi_güncelle-' + id + ' #kisi_ekle_info_phone1').val(rowData.phone1);
@@ -121,7 +121,7 @@ function insertDataToListe(dataset) {
             { title: "Soyadı", data:"surname" },
             { title: "Durumu", data:"status" },
             { title: "Ünvanı", data:"title" },
-            { title: "Firması", data:"xcmpcode" },
+            { title: "Firması", data:"account" },
             { title: "İş Telefonu", data:"phone1" },
             { title: "Cep Telefonu", data:"phone2" },
             { title:'İşlemler', defaultContent:"<button class='btn btn-primary btn-xs btn-tablo-guncelle'><i class='fa fa-pencil'>  Güncelle</i>" +
@@ -184,12 +184,14 @@ function insertDataToListe(dataset) {
 
 
 $(function () {
-$("#kisi_listele_name").autocomplete ({
-    source: "autocomplete",
-    select: function(event, ui) {
-        $('#kisi_listele_name').val(ui.item.value);
-    }
-});
+    $("#kisi_listele_name").autocomplete ({
+        source: window.location + '/autocompleteName',
+        minLength: 1
+    });
+
+    $("#kisi_listele_surname").autocomplete ({
+       source: window.location + '/autocompleteSurname'
+    });
 });
 
 function getContactInfo(dataSet) {
@@ -205,7 +207,7 @@ function getContactInfo(dataSet) {
            ],
            columns: [
                {data: "id"},
-               {title: "Firma", data: "xcmpcode"},
+               {title: "Firma", data: "name"},
                {title: "Ünvanı", data: "title"}
            ],
            "language": {
@@ -230,10 +232,3 @@ function getContactInfo(dataSet) {
        });
 
 }
-
-
-
-
-
-
-

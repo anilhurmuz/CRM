@@ -57,8 +57,8 @@ class AccountController extends Controller {
 			$request->request->add(['parentid'=>$id,'parenttype'=>'account']);
 		}
 
-		$input = $request->all();
-		Info::create($input);
+		//$input = $request->all();
+		//Info::create($input);
 
 		return redirect('crm/musteri_yonetimi');
 	}
@@ -92,22 +92,43 @@ class AccountController extends Controller {
 	 */
 	public function edit(Request $request)
 	{
-		$sql = "";
 		$id = $request->get('data');
-		$response = Info::where('parentid','=',$id)->first();
-		$type = $response->getAttribute('parenttype');
+		$type = $request->get('type');
+
+
+
+		//if type is account, informaitons will be taken from account table
+		if($type == "musteri"){
+			$customer = Account::find($id);
+			$sql = "select info.id,info.parentid,info.parenttype,info.type,info.status,info.address ,iller.name citycode, ilceler.name countycode, info.citycode cityid, info.countycode countyid,info.zipcode,info.phone1,info.phone2,info.web,info.taxoff,info.taxno,info.acccode
+					from info
+					left outer join iller on iller.id=info.citycode
+					left outer join ilceler on ilceler.id=info.countycode
+					where info.parentid = $id and info.parenttype = 'account' and info.deleted_at is null";
+
+			$tableData = DB::select(DB::raw($sql));
+
+			//contactCekmeKısmıBebeğim
+			$sql = "select c.id,c.name, c.surname, a.status, a.title, c.phone1, c.phone2, c.facebook, c.twitter, c.linkedin, c.description, c.bulletin, ac.name 'account' from accounts_contacts a
+		left outer join contacts c on a.contactid = c.id
+		left outer join accounts ac on a.accountid = ac.id where a.accountid=$id and c.deleted_at is NULL;";
+			$record = DB::select($sql);
+		}
 
 		//if type is lead, informaitons will be taken from lead table
-		if($type == "lead"){
-			$customer = Lead::find($id);
-		}
-		//if type is account, informaitons will be taken from account table
 		else{
-			$customer = Account::find($id);
+			$customer = Lead::find($id);
+			$sql = "select info.id,info.parentid,info.parenttype,info.type,info.status,info.address ,iller.name citycode, ilceler.name countycode, info.citycode cityid, info.countycode countyid, info.zipcode,info.phone1,info.phone2,info.web,info.taxoff,info.taxno,info.acccode
+					from info
+					left outer join iller on iller.id=info.citycode
+					left outer join ilceler on ilceler.id=info.countycode
+					where info.parentid = $id and info.parenttype = 'lead' and info.deleted_at is null";
+			$tableData = DB::select(DB::raw($sql));
+
+			$record = null;
 		}
 
-
-		return view('pages.crm.musteri_yonetimi.guncelle')->with('infoData',$response)->with('customerInfo',$customer);
+		return view('pages.crm.musteri_yonetimi.guncelle')->with('type',$type)->with('customerInfo',$customer)->with('tableDataAddress',json_encode($tableData))->with('tableDataContact', json_encode($record));
 	}
 
 	/**
@@ -128,44 +149,26 @@ class AccountController extends Controller {
 		//getting hidden id form field.
 		$id = $request->get('id');
 
-		//getting the current Informations of the selected person.
-		$currentRecord = Info::where("parentid","=",$id)->first();
-		//assigning current type stored in the Info table.
-		$parentType = $currentRecord->getAttribute('parenttype');
+		$isAccount = Account::find($id);
 
-
-		$isChangedType = ($selectedType == 'musteri' && $parentType == 'lead');
-
-		if($isChangedType){
+		if($isAccount == null && $selectedType == 'musteri'){
 			//move the records from Leads to Accounts table
 			Lead::destroy($id);
 			$affected = Account::create($input);
 			//id is changed because the record is moved to another table.
 			$affectedParentId = $affected->getAttribute('id');
-			$lastType = "account";
+			Info::where('parentid', '=',$id)->where('parenttype','=','lead')->update(['parentid' => $affectedParentId,'parenttype'=>'account']);
 		}
-		else if(!$isChangedType && $selectedType == 'musteri'){
+		else if($selectedType == 'musteri'){
 			//updating the Accounts table.
 			$account = Account::find($id);
 			$account->update($input);
-			$lastType = "account";
 		}
 		else{
 			//updating the Leads table.
 			$lead = Lead::find($id);
 			$lead->update($input);
-			$lastType = "lead";
 		}
-
-		//updating request with correct customer type
-		$request->request->add(['parenttype'=>$lastType]);
-		if(isset($affectedParentId)) {$request->request->add(['parentid'=>$affectedParentId]);}
-		$input = $request->all();
-
-		//after all, for all statements, updating the Info table with new inputs.
-		$info = Info::where('parentid','=',$id)->first();
-		$info->update($input);
-
 
 		return redirect('crm/musteri_yonetimi');
 
@@ -187,7 +190,6 @@ class AccountController extends Controller {
 		else
 			Lead::destroy($id);
 
-		Info::where('parentid','=',$id)->delete();
 
 	}
 

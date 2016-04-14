@@ -12,8 +12,7 @@ class Info extends Model {
 	protected $dates = ['deleted_at'];
 
 	protected $fillable = ['type', 'status', 'address','citycode',
-		'countrycode','phone1', 'phone2','web','taxoff','taxno',
-		'acccode','facebook','twitter', 'linkedin','parenttype',
-		'parentid', 'xcmpcode','createduser','updateduser','created_at','updated_at'];
+		'countycode','zipcode','phone1', 'phone2','web','taxoff','taxno',
+		'acccode','parenttype', 'parentid', 'xcmpcode','createduser','updateduser','created_at','updated_at'];
 
 }

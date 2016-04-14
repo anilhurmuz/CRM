@@ -20,7 +20,7 @@
 
                         <div>
                             <input name="name" id="kisi_listele_name" class="form-control input-sm m-bot15"
-                                    style="width:200px; float: left;" autocomplete="on"/>
+                                    style="width:200px; float: left;"/>
                             <button name="btn_kisi_search_name" id="btn_kisi_search_name"
                                     onclick="kisi_searc_toogle(this)" class="btn btn-success" type="button"
                                     style=" height: 30px; "><i
@@ -31,7 +31,7 @@
                         <label class="col-sm-1 control-label width-150">Soyadı</label>
                         <div>
                             <input name="surname" id="kisi_listele_surname" class="form-control input-sm m-bot15"
-                                    style="width:200px; float: left;" autocomplete="on"/>
+                                    style="width:200px; float: left;" />
                             <button name="btn_kisi_search_surname" id="btn_kisi_search_surname"
                                     onclick="kisi_searc_toogle(this)" class="btn btn-success" type="button"
                                     style=" height: 30px; "><i

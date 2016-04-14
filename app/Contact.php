@@ -12,7 +12,7 @@ class Contact extends Model {
 
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['name', 'surname', 'description','bulletin','leadsourceid',
+    protected $fillable = ['name', 'surname', 'description','phone1','phone2','facebook','twitter','linkedin','bulletin','leadsourceid',
         'campaignid','xcmpcode','createduser','updateduser','created_at','updated_at'];
 
 }

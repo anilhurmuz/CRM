@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class ContactController extends Controller {
 
@@ -19,13 +20,17 @@ class ContactController extends Controller {
 	 */
 	public function index()
 	{
-		$sql = "select c.id,c.name, c.surname, a.status, a.title, a.xcmpcode, i.phone1, i.phone2, i.facebook, i.twitter, i.linkedin, c.description, c.bulletin from contacts c
-		left outer join accounts_contacts a on a.contactid = c.id and a.deleted_at is NULL
-		left outer join info i on i.parentid=c.id and i.parenttype='contact' and i.deleted_at is NULL where c.deleted_at is NULL;";
-
+		$sql = "select c.id,c.name, c.surname, a.status, a.title, c.phone1, c.phone2, c.facebook, c.twitter, c.linkedin, c.description, c.bulletin, ac.name 'account' from accounts_contacts a
+		left outer join contacts c on a.contactid = c.id
+		left outer join accounts ac on a.accountid = ac.id where c.deleted_at is NULL;";
 		$record = DB::select($sql);
 
-		return view('pages.crm.kisi_yonetimi.kisi_yonetimi')->with('mydata',json_encode($record));
+		$sqlForFirm = "select id,name from accounts";
+		$firmNames = DB::select($sqlForFirm);
+
+		return view('pages.crm.kisi_yonetimi.kisi_yonetimi')
+			->with('mydata', json_encode($record))
+			->with('firmNames', $firmNames);
 	}
 
 	/**
@@ -37,17 +42,16 @@ class ContactController extends Controller {
 	public function create(Request $request)
 	{
 		$input = $request->all();
-		$accId = $request->get('id');
-		$affected = Contact::create($input);
-		$id = $affected->getAttribute('id');
-		$request->request->add(['accountid'=>$accId,'contactid'=>$id]);
+		$createdRow = Contact::create($input);
+		$contactId = $createdRow->getAttribute('id');
+		if($request->get('parentid')==null)
+			$request->request->add(['contactid'=>$contactId, 'accountid'=>$input['account']]);
+		else
+			$request->request->add(['accountid'=>$input['parentid'], 'contactid'=>$contactId]);
 		$input = $request->all();
 		Accounts_Contacts::create($input);
-		$request->request->add(['parentid'=>$id, 'parenttype'=>'contact']);
-		$input = $request->all();
-		Info::create($input);
 
-		return redirect('crm/musteri_yonetimi');
+		return redirect('crm/kisi_yonetimi');
 	}
 
 	/**
@@ -56,14 +60,27 @@ class ContactController extends Controller {
 	 * @return Response
 	 */
 
-	public function autocomplete(Request $request) {
+	public function autocompleteName(Request $request) {
 
 		$key = $request->get('term');
-		dd($key);
-		$names = Contact::where('name','LIKE','%'.$term.'%')->get();
+		$names = Contact::where('name','LIKE',$key.'%')->get();
 
-		return view('pages.crm.kisi_yonetimi.listele')
-			->with('result', json_encode($names));
+		foreach($names as $name) {
+			$res[] = array('value'=> $name->name);
+		}
+
+		return json_encode($res);
+	}
+
+	public function autocompleteSurname(Request $request) {
+		$key = $request->get('term');
+		$surnames = Contact::where('surname','LIKE',$key.'%')->get();
+
+		foreach($surnames as $surname) {
+			$res[] = array('value'=> $surname->surname);
+		}
+
+		return json_encode($res);
 	}
 
 	public function store()
@@ -91,13 +108,20 @@ class ContactController extends Controller {
 	public function edit(Request $request)
 	{
 		$id = $request->get('data');
-		$response = Info::where('parentid','=',$id)->first();
 
-		$contactInfoFromDatabase = Accounts_Contacts::where('contactid','=',$id)
-			->select('id', 'title', 'xcmpcode')->get();
+		$sqlForSpecificContact = "select c.id, c.name, c.surname, c.description, c.phone1, c.phone2, c.facebook, c.twitter, c.linkedin, c.bulletin, a.accountid 'account', a.status, a.title from contacts c left outer join accounts_contacts a on a.contactid=c.id where c.id=$id;";
+		$response = DB::select($sqlForSpecificContact);
 
-		return view('pages.crm.kisi_yonetimi.guncelle')->with('data',$response)
-			->with('contactInfo', json_encode($contactInfoFromDatabase));
+		$sql = "select c.id, a.name, c.title from accounts a left outer join accounts_contacts c on c.accountid=a.id where c.contactid=$id;";
+		$contactInfoFromDatabase = DB::select($sql);
+
+		$sqlForFirm = "select id,name from accounts";
+		$firmNames = DB::select($sqlForFirm);
+
+		return view('pages.crm.kisi_yonetimi.guncelle')
+			->with('data', $response)
+			->with('contactInfo', json_encode($contactInfoFromDatabase))
+			->with('firmNames', $firmNames);
 	}
 
 	/**
@@ -109,12 +133,9 @@ class ContactController extends Controller {
 	public function update(Request $request)
 	{
 		$input = $request->all();
-
-		Contact::where('id','=',$input['id'])->update(['name'=>$input['name'], 'surname'=>$input['surname'], 'description'=>$input['description'], 'bulletin'=>$input['bulletin']]);
-		Accounts_Contacts::where('contactid','=',$input['id'])->update(['status'=>$input['status'], 'title'=>$input['title'], 'xcmpcode'=>$input['xcmpcode']]);
-		Info::where('parentid','=',$input['id'])
-			->where('parenttype','=','contact')->update(['phone1'=>$input['phone1'], 'phone2'=>$input['phone2'], 'facebook'=>$input['facebook'], 'twitter'=>$input['twitter'], 'linkedin'=>$input['linkedin']]);
-
+		Contact::where('id','=',$input['id'])->update(['name'=>$input['name'], 'surname'=>$input['surname'], 'description'=>$input['description'], 'bulletin'=>$input['bulletin'], 'phone1'=>$input['phone1'], 'phone2'=>$input['phone2'], 'facebook'=>$input['facebook'], 'twitter'=>$input['twitter'], 'linkedin'=>$input['linkedin']]);
+		$accounts_contactsId = Accounts_Contacts::where('contactid','=',$input['id'])->get();
+		Accounts_Contacts::where('id','=',$accounts_contactsId->id)->update(['accountid'=>$input['account'] ,'status'=>$input['status'], 'title'=>$input['title']]);
 		return redirect('crm/kisi_yonetimi');
 	}
 
@@ -128,11 +149,8 @@ class ContactController extends Controller {
 	{
 		$id = $request->get('id');
 		Contact::destroy($id);
-		Accounts_Contacts::destroy($id);
-		$infoId = Info::where('parentid','=',$id)
-			->where('parenttype','=','contact')
-			->select('id')->get()->first();
-		Info::destroy($infoId['id']);
+		$acIds = Accounts_Contacts::where('contactid','=',$id)->get();
+		foreach($acIds as $acId) Accounts_Contacts::destroy($acId->id);
 	}
 
 }

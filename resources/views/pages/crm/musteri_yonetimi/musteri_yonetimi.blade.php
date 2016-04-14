@@ -1,7 +1,9 @@
 @extends('app')
 @include('pages.crm.musteri_yonetimi.ekle')
 @include('pages.crm.musteri_yonetimi.listele')
-@include('pages.modals')
+@include('pages.commonmodals')
+
+
 
 @section('content')
     <section id="main-content">
@@ -12,7 +14,6 @@
                         @section('tab')
 
                         @show
-
                     </ul>
                 </header>
                 <div class="panel-body">
@@ -24,22 +25,18 @@
                 </div>
             </section>
         </section>
-        @section('modalAccountAddress')
-            @show
-        @section('modalAccountContact')
-            @show
-        @section('modalRemove')
-            @show
+
     </section>
 
+
+@section('modalRemove')
+@show
 
     <script src="{{Request::root()}}/js/musteri_yonetim.js"></script>
 
     <script type="text/javascript">
         $(function(){
-            console.log({!! $mydata !!});
             insertDataToListe({!! $mydata !!});
-
         });
     </script>
 

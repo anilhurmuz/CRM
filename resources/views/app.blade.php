@@ -19,7 +19,8 @@
     <link href="{{Request::root()}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css"
           media="screen"/>
     <link rel="stylesheet" href="{{Request::root()}}/css/owl.carousel.css" type="text/css">
-
+    <link rel="stylesheet" type="text/css" href="{{Request::root()}}/assets/bootstrap-datepicker/css/datepicker.css" />
+    <link rel="stylesheet" type="text/css" href="{{Request::root()}}/assets/bootstrap-datetimepicker/css/datetimepicker.css" />
     <!--right slidebar-->
     <link href="{{Request::root()}}/css/slidebars.css" rel="stylesheet">
 
@@ -29,7 +30,7 @@
     <link href="{{Request::root()}}/css/customstyle.css" rel="stylesheet">
     <link href="{{Request::root()}}/css/style-responsive.css" rel="stylesheet"/>
     <link href="{{Request::root()}}/css/jquery.dataTables.min.css" rel="stylesheet"/>
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
     <script src="{{Request::root()}}/js/jquery.js"></script>
     <script src="{{Request::root()}}/js/jquery-1.12.0.min.js"></script>
@@ -311,7 +312,7 @@
 
 <!--common script for all pages-->
 <script src="{{Request::root()}}/js/common-scripts.js"></script>
-
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="{{Request::root()}}/js/jquery.dataTables.min.js"></script>
 <script>
     $('document').ready(function(){

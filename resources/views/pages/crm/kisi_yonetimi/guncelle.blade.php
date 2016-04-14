@@ -30,8 +30,11 @@
                 <div class="form-group">
                     <label class="col-sm-1 control-label width-150">Firması</label>
                     <div class="col-sm-5">
-                        <input name="account" id="kisi_ekle_contact_account" type="text"
-                               class="form-control width-200">
+                        <select name="account" id="kisi_ekle_contact_account" class="form-control input-sm m-bot15"  style="width:200px; float: left;" required>
+                            @foreach($firmNames as $firmName)
+                                <option value="{{ $firmName->id }}">{{ $firmName->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                 </div>
@@ -42,8 +45,8 @@
                                 class="form-control input-sm m-bot15"
                                 style="width:200px; float: left;">
                             <option value="" disabled selected>Seçiniz</option>
-                            <option value="Çalışan">Çalışan</option>
-                            <option value="Ayrılmış">Ayrılmış</option>
+                            <option value="worked">Çalışan</option>
+                            <option value="discharged">Ayrılmış</option>
                         </select>
 
                     </div>
@@ -181,7 +184,6 @@
  </section>
  <script type="text/javascript">
  $(function () {
-     console.log({!! $contactInfo !!});
  getContactInfo({!! $contactInfo !!});
  });
 </script>

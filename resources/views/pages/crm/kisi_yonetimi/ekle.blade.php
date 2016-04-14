@@ -42,8 +42,11 @@
                 <div class="form-group">
                     <label class="col-sm-1 control-label width-150">Firması</label>
                     <div class="col-sm-5">
-                        <input name="account" id="kisi_ekle_contact_account" type="text"
-                               class="form-control width-200">
+                        <select name="account" class="form-control input-sm m-bot15" style="width:200px; float: left;" required>
+                            @foreach($firmNames as $firmName)
+                            <option value="{{ $firmName->id }}">{{ $firmName->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                 </div>

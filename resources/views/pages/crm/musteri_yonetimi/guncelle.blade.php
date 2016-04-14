@@ -1,16 +1,25 @@
-@if ($infoData['type'] == "musteri")
-    {{$disabled = "disabled"}}
-@else
-    {{$disabled = ""}}
-@endif
+<?php
+  if($type=='musteri') $disabled = 'disabled';
+  else $disabled = '';
+?>
+@include('pages.modals')
+@include('pages.commonmodals')
+
+@section('modalAccountAddress')
+@show
+@section('modalAccountContact')
+@show
+@section('modalRemove')
+@show
+
 
 <form name="form_musteri_guncelle" id="form_musteri_guncelle"
       class="form-horizontal tasi-form center-block" method="post" action="{{Request::root()}}/crm/musteri_yonetimi/update">
     <input type="hidden" name="_token" id="my_token" value="<?= csrf_token();?>">
     <input type="hidden" name="xcmpcode" id="xcmpcode" value="{!! $xcmpcode !!}">
-    <input type="hidden" name="id" id="guncelle_acc_id" value="{{$infoData['parentid']}}">
+    <input type="hidden" name="id" id="guncelle_acc_id" value="{{$customerInfo['id']}}">
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <div class="form-group">
                 <label class="col-sm-1 control-label width-150">Müşteri Kısa Adı</label>
                 <div class="col-sm-5">
@@ -31,8 +40,8 @@
                 <label class="col-sm-1 control-label width-150">Durumu</label>
                 <div class="col-sm-5">
                     <select name="status" id="guncelle_acc_status" value="pasif" class="form-control">
-                        <option value="aktif"  @if ($infoData['status'] == "aktif") {{"selected"}} @endif>Aktif</option>
-                        <option value="pasif"  @if ($infoData['status'] == "pasif") {{"selected"}} @endif>Pasif</option>
+                        <option value="aktif"  @if ($customerInfo['status'] == "aktif") {{"selected"}} @endif>Aktif</option>
+                        <option value="pasif"  @if ($customerInfo['status'] == "pasif") {{"selected"}} @endif>Pasif</option>
                     </select>
                 </div>
             </div>
@@ -43,8 +52,8 @@
                     <button data-toggle="dropdown" type="button" name="btn_mus_islem" id="btn_mus_islem"
                             class="btn-add-margin-left btn btn-success"  aria-expanded="false">İşlemler</button>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a data-toggle="modal" onclick="onCityClick()" href="#modalAccountAddress">Müşteri Adresi Ekleme</a></li>
-                        <li><a data-toggle="modal" href="#modalAccountContact">Kişi Ekleme</a></li>
+                        <li><a data-toggle="modal" onclick="onCityClick('info_citycode',0)" href="#modalAccountAddress-{{$customerInfo['id']}}">Müşteri Adresi Ekleme</a></li>
+                        <li><a data-toggle="modal" href="#modalAccountContact-{{$customerInfo['id']}}" @if($type != 'musteri' ) {!! "style='display: none;'" !!} @endif>Kişi Ekleme</a></li>
 
                     </ul>
                 </div>
@@ -52,7 +61,7 @@
             </div>
 
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <div class="form-group">
                 <label class="col-sm-1 control-label width-150">Sektörü</label>
                 <div class="col-sm-5">
@@ -67,37 +76,11 @@
             <div class="form-group">
                 <label class="col-sm-1 control-label width-150">Tipi</label>
                 <div class="col-sm-5">
-                    <select name="type" id="guncelle_acc_type" class="form-control" @if ($infoData['type'] == "musteri") {{"readonly"}} @endif>
-                        <option value="musteri" @if ($infoData['type'] == "musteri") {{"selected"}} @endif>Müşteri</option>
-                        <option value="potansiyel" @if ($infoData["type"] == "potansiyel") {{"selected"}} @endif {{$disabled}}>Potansiyel Müşteri</option>
-                        <option value="muhtemel" @if ($infoData["type"] == "muhtemel") {{"selected"}} @endif {{$disabled}}>Muhtemel Aday</option>
+                    <select name="type" id="guncelle_acc_type" class="form-control" @if ($type == "musteri") {{"readonly"}} @endif>
+                        <option value="musteri" @if ($type == "musteri") {{"selected"}} @endif>Müşteri</option>
+                        <option value="potansiyel" @if ($type == "potansiyel") {{"selected"}} @endif {{$disabled}}>Potansiyel Müşteri</option>
+                        <option value="muhtemel" @if ($type == "muhtemel") {{"selected"}} @endif {{$disabled}}>Muhtemel Aday</option>
                     </select>
-                </div>
-            </div>
-
-
-        </div>
-
-        <div class="col-lg-4">
-            <div class="form-group">
-                <label class="col-sm-1 control-label width-150">Vergi Dairesi</label>
-                <div class="col-sm-5">
-                    <input name="taxoff" id="guncelle_info_taxoff" value="{{$infoData['taxoff']}}"  type="text" class="form-control">
-                </div>
-
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-1 control-label width-150">Vergi Numarası</label>
-                <div class="col-sm-5">
-                    <input name="taxno" id="guncelle_info_taxno" value="{{$infoData['taxno']}}" type="text" class="form-control">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-1 control-label width-150">Muh. Kodu</label>
-                <div class="col-sm-5">
-                    <input name="acccode" id="guncelle_info_acccode" value="{{$infoData['acccode']}}" type="text" class="form-control">
                 </div>
             </div>
 
@@ -110,12 +93,15 @@
                     </button>
                 </div>
             </div>
-
         </div>
+
     </div>
 </form>
 
-<!-- Güncelle Alt Tablosu Başlangıcı-->
+@section('modalAccountAddressEdit')
+@show
+
+        <!-- Güncelle Alt Tablosu Başlangıcı-->
 
 <section class="panel" style="margin-top: 50px">
     <header class="panel-heading tab-bg-dark-navy-grey ">
@@ -123,6 +109,7 @@
             <li class="active">
                 <a data-toggle="tab" href="#iletişim">İletişim</a>
             </li>
+            @if( $type == 'musteri' )
             <li class="">
                 <a data-toggle="tab" href="#kişiler">Kişiler</a>
             </li>
@@ -132,27 +119,39 @@
             <li class="">
                 <a data-toggle="tab" href="#sözleşmeler">Sözleşmeler</a>
             </li>
+            @endif
         </ul>
     </header>
     <div class="panel-body">
         <div class="tab-content">
             <div id="iletişim" class="tab-pane active">
 
-                <table id="güncelle_iletişim_tablo" width="100%">
+                <table id="account_update_address-{{$type}}-{{$customerInfo['id']}}" class="display" width="100%">
 
                 </table>
+                <script type="text/javascript">
+                    insertIletisimToListe({!! $tableDataAddress !!},'{{$type}}-{{$customerInfo['id']}}');
+                </script>
 
             </div>
             <div id="kişiler" class="tab-pane">
-
-                <table id="güncelle_kişiler_tablo" width="100%">
+                <table id="account_update_contacts-{{$type}}-{{$customerInfo['id']}}" class="display" width="100%">
 
                 </table>
-
+                <script type="text/javascript">
+                    @if($tableDataContact !=null)
+                    insertDataToContact({!!$tableDataContact!!}, '{{$type}}-{{$customerInfo['id']}}');
+                    @endif
+                </script>
             </div>
+
             <div id="satışfırsatları" class="tab-pane"></div>
             <div id="sözleşmeler" class="tab-pane"></div>
         </div>
     </div>
 </section>
+
+<div id="modals-{{$customerInfo['id']}}">
+
+</div>
 <!-- Güncelle Alt Tablosu Bitişi -->

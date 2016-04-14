@@ -11,7 +11,7 @@
     <form name="form_müsteri_listele" id="form_müsteri_listele"
           class="form-horizontal tasi-form center-block" method="post">
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <div class="form-group">
                     <label class="col-sm-1 control-label width-150">Müşteri Kısa Adı</label>
                     <div>
@@ -76,7 +76,7 @@
 
 
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <div class="form-group">
                     <label class="col-sm-1 control-label width-150">Tipi</label>
                     <div>
@@ -140,7 +140,7 @@
 
             </div>
 
-            <div class="col-lg-4 margin-left-100">
+            <div class="col-lg-4">
 
                 <section class="panel search-panel-background">
                     <header class="panel-heading">
@@ -232,10 +232,6 @@
     </form>
 
     <div class="listele-table">
-
-        <script>
-
-        </script>
 
 
         <table id="musteri_listele_tablo" class="display" width="100%"></table>

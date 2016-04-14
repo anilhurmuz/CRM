@@ -36,16 +36,30 @@ Route::post('crm/musteri_yonetimi/create','Account\AccountController@create');
 Route::post('crm/musteri_yonetimi/update','Account\AccountController@update');
 Route::post('crm/musteri_yonetimi/edit','Account\AccountController@edit');
 Route::post('crm/musteri_yonetimi/delete','Account\AccountController@destroy');
-Route::post('crm/musteri_yonetimi/ekle_kisi','Contact\ContactController@create');
-
+Route::post('crm/musteri_yonetimi/kisi_ekle','Contact\ContactController@create');
 Route::post('crm/musteri_yonetimi/fill_city_county','Account\AccountController@fillCityCountyBoxes');
+Route::post('crm/musteri_yonetimi/contactDeleteInAccount','Contact\ContactController@destroy');
+//adding new address information to the Info table.
+Route::post('/crm/musteri_yonetimi/adres_ekle','InfoController@create');
+Route::post('/crm/musteri_yonetimi/delete_address','InfoController@destroy');
+Route::post('/crm/musteri_yonetimi/edit_address','InfoController@edit');
+Route::post('/crm/musteri_yonetimi/update_address','InfoController@update');
+
 
 Route::get('crm/kisi_yonetimi', 'Contact\ContactController@index');
-Route::post('crm/kisi_yonetimi/ekle_kisi','Contact\ContactController@create');
+Route::post('crm/kisi_yonetimi/create','Contact\ContactController@create');
 Route::post('crm/kisi_yonetimi/delete','Contact\ContactController@destroy');
 Route::post('crm/kisi_yonetimi/edit','Contact\ContactController@edit');
 Route::post('crm/kisi_yonetimi/update','Contact\ContactController@update');
-Route::get('autocomplete', 'Contact\ContactController@autocomplete');
+Route::any('crm/kisi_yonetimi/autocompleteName', 'Contact\ContactController@autocompleteName');
+Route::any('crm/kisi_yonetimi/autocompleteSurname', 'Contact\ContactController@autocompleteSurname');
+
+Route::get('crm/ebulten_yonetimi', 'Bulletin\BulletinController@index');
+Route::post('crm/ebulten_yonetimi/create','Bulletin\BulletinController@create');
+Route::post('crm/ebulten_yonetimi/delete','Bulletin\BulletinController@destroy');
+Route::post('crm/ebulten_yonetimi/edit','Bulletin\BulletinController@edit');
+Route::post('crm/ebulten_yonetimi/update','Bulletin\BulletinController@update');
+
+
 
 Route::get('crm/{page}','PagesController@index');
-
