@@ -20,14 +20,13 @@ class ContactController extends Controller {
 	 */
 	public function index()
 	{
-		$sql = "select c.id,c.name, c.surname, a.status, a.title, c.phone1, c.phone2, c.facebook, c.twitter, c.linkedin, c.description, c.bulletin, ac.name 'account' from accounts_contacts a
-		left outer join contacts c on a.contactid = c.id
-		left outer join accounts ac on a.accountid = ac.id where c.deleted_at is NULL;";
+		$sql = "select c.id, c.name, c.surname, a.status, a.title, c.phone1, c.phone2, c.facebook, c.twitter, c.linkedin, c.description, c.bulletin, ac.name 'account', a.accountid 'accountid' from contacts c
+		left outer join accounts_contacts a on a.contactid = c.id
+		left outer join accounts ac on a.accountid = ac.id where c.deleted_at is NULL and a.id = (SELECT MAX(id) FROM accounts_contacts acs WHERE acs.contactid = c.id);";
 		$record = DB::select($sql);
 
-		$sqlForFirm = "select id,name from accounts";
+		$sqlForFirm = "select id, name from accounts";
 		$firmNames = DB::select($sqlForFirm);
-
 		return view('pages.crm.kisi_yonetimi.kisi_yonetimi')
 			->with('mydata', json_encode($record))
 			->with('firmNames', $firmNames);
@@ -99,20 +98,30 @@ class ContactController extends Controller {
 		//
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+	//Kişiler birden fazla şirkette çalışmış olabilir
+
+	public function addContactFirm(Request $request) {
+		$input = $request->all();
+		$request->request->add(['accountid'=>$input['account']]);
+		$input = $request->all();
+		$affected = Accounts_Contacts::create($input);
+
+		$id = $input['contactid'];
+
+		$sql = "select c.id, a.name, c.title, c.contactid 'contact' from accounts a left outer join accounts_contacts c on c.accountid=a.id where c.contactid=$id;";
+		$record = DB::select($sql);
+
+		return response()->json($record);
+	}
+
 	public function edit(Request $request)
 	{
 		$id = $request->get('data');
 
-		$sqlForSpecificContact = "select c.id, c.name, c.surname, c.description, c.phone1, c.phone2, c.facebook, c.twitter, c.linkedin, c.bulletin, a.accountid 'account', a.status, a.title from contacts c left outer join accounts_contacts a on a.contactid=c.id where c.id=$id;";
+		$sqlForSpecificContact = "select c.id, c.name, c.surname, c.description, c.phone1, c.phone2, c.facebook, c.twitter, c.linkedin, c.bulletin, a.accountid , a.status, a.title from contacts c left outer join accounts_contacts a on a.contactid=c.id where c.id=$id;";
 		$response = DB::select($sqlForSpecificContact);
 
-		$sql = "select c.id, a.name, c.title from accounts a left outer join accounts_contacts c on c.accountid=a.id where c.contactid=$id;";
+		$sql = "select c.id, a.name, c.title, c.contactid 'contact' from accounts a left outer join accounts_contacts c on c.accountid=a.id where c.contactid=$id;";
 		$contactInfoFromDatabase = DB::select($sql);
 
 		$sqlForFirm = "select id,name from accounts";
@@ -121,7 +130,8 @@ class ContactController extends Controller {
 		return view('pages.crm.kisi_yonetimi.guncelle')
 			->with('data', $response)
 			->with('contactInfo', json_encode($contactInfoFromDatabase))
-			->with('firmNames', $firmNames);
+			->with('firmNames', $firmNames)
+			->with('contact', $id);
 	}
 
 	/**

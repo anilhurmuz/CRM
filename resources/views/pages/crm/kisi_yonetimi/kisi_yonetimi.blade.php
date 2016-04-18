@@ -1,6 +1,7 @@
 @extends('app')
 @include('pages.crm.kisi_yonetimi.ekle')
 @include('pages.crm.kisi_yonetimi.listele')
+
 @section('content')
     <section id="main-content">
         <section class="wrapper">
@@ -21,8 +22,6 @@
                 </div>
             </section>
         </section>
-
-
     </section>
 
 
@@ -30,6 +29,7 @@
 
     <script>
         $(function () {
+          //  oneDataTable({!! $mydata !!}, '#kisi_listele_tablo', '.btn-tablo-guncelle', '.btn-tablo-sil')
             insertDataToListe({!! $mydata !!});
         });
 

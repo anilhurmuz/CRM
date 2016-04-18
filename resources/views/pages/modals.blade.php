@@ -1,5 +1,3 @@
-
-
 @section('modalUpdate')
     @parent
 
@@ -7,7 +5,7 @@
 
 @section('modalAccountAddress')
     @parent
-    <div class="modal fade modal-dialog-center" id="modalAccountAddress-{{$customerInfo['id']}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade modal-dialog-center" id="modalAccountAddress-{{$type}}-{{$customerInfo['id']}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="custom-modal-content">
 
@@ -61,7 +59,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-1 control-label width-150 control-label">İl </label>
                                         <div>
-                                            <select name="citycode" id="info_citycode" onchange="onCityChanged('info_citycode','info_countycode',0)" class="form-control input-sm m-bot15"
+                                            <select name="citycode" class="info_citycode" onchange="onCityChanged('info_citycode','info_countycode',0)" class="form-control input-sm m-bot15"
                                                     style="width:200px; float: left;">
                                                 <option value="" disabled selected>Seçiniz</option>
                                             </select>
@@ -71,7 +69,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-1 control-label width-150">İlçe </label>
                                         <div>
-                                            <select name="countycode" id="info_countycode"
+                                            <select name="countycode" class="info_countycode"
                                                     class="form-control input-sm m-bot15"
                                                     style="width:200px; float: left;">
                                                 <option value="" disabled selected>Seçiniz</option>
@@ -171,7 +169,7 @@
 
 @section('modalAccountContact')
     @parent
-    <div class="modal fade modal-dialog-center" id="modalAccountContact-{{$customerInfo['id']}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade modal-dialog-center" id="modalAccountContact-{{$type}}-{{$customerInfo['id']}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="custom-modal-content">
 

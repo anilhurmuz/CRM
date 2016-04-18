@@ -80,7 +80,7 @@ function showguncelle(rowData){
             $('#div_kisi_güncelle-' + id + ' .contId').val(rowData.id);
             $('#div_kisi_güncelle-' + id + ' #kisi_ekle_contact_name').val(rowData.name);
             $('#div_kisi_güncelle-' + id + ' #kisi_ekle_contact_surname').val(rowData.surname);
-            $('#div_kisi_güncelle-' + id + ' #kisi_ekle_contact_account').val(rowData.account);
+            $('#div_kisi_güncelle-' + id + ' #kisi_ekle_contact_account').val(rowData.accountid);
             $('#div_kisi_güncelle-' + id + ' #kisi_ekle_account_contact_status').val(rowData.status);
             $('#div_kisi_güncelle-' + id + ' #kisi_ekle_account_contact_title').val(rowData.title);
             $('#div_kisi_güncelle-' + id + ' #kisi_ekle_info_phone1').val(rowData.phone1);
@@ -112,7 +112,6 @@ function insertDataToListe(dataset) {
                 targets  :   [0],
                 visible :   false,
                 searchable: false
-
             }
         ],
         columns: [
@@ -194,16 +193,19 @@ $(function () {
     });
 });
 
-function getContactInfo(dataSet) {
+function getContactInfo(dataSet, tableId) {
 
-       $('#kisi-update-table').DataTable({
+          if ( $.fn.DataTable.isDataTable('#kisi-update-table-' + tableId) ) {
+          $('#kisi-update-table-' + tableId).DataTable().destroy();
+            }
+
+          $('#kisi-update-table-' + tableId).DataTable({
            data: dataSet,
            columnDefs: [
                {
-                   targets: [0],
-                   visible: false,
-                   searchable: false
-               }
+                   "targets": [0],
+                   "visible": false,
+                   "searchable": false                 }
            ],
            columns: [
                {data: "id"},
@@ -230,5 +232,73 @@ function getContactInfo(dataSet) {
                "sInfoEmpty": "Toplam 0 sonuç arasından 0 ile 0 arasındaki sonuçlar gösteriliyor."
            }
        });
-
 }
+
+/*function oneDataTable(dataSet, selector, selectorForUpdate, selectorForDelete) {
+    var jsonParser = dataSet;
+    $(selector).DataTable({
+        data: dataSet,
+        columnDefs: [{
+          "targets": [0],
+          "visible": false,
+          "searchable": false
+        }],
+        column: [
+          for(var i in jsonParser) {
+              {title: jsonParser[i].rowTitle, data: jsonParser[i].rowData}
+            if(jsonParser[i].defaultContent!=null) {
+              {title: jsonParser[i].rowTitle, data: jsonParser[i].rowData}
+            }
+          }
+        ],
+        "language": {
+            "lengthMenu": ' <select>'+
+            '<option value="10">10</option>'+
+            '<option value="30">30</option>'+
+            '<option value="50">50</option>'+
+            '<option value="100">100</option>'+
+            '<option value="200">200</option>'+
+            '<option value="500">500</option>'+
+            '<option value="1000">1000</option>'+
+            '<option value="-1">All</option>'+
+            '</select> Kayıt Görüntüle',
+            "sInfo": "Toplam \_TOTAL\_ sonuç arasından \_START\_ ile \_END\_ arasındaki sonuçlar gösteriliyor.",
+            "paginate": {
+                "next": "İleri",
+                "previous": "Geri"
+            },
+            "emptyTable": "Tablo içinde görüntülenecek veri bulunamadı",
+            "sInfoEmpty": "Toplam 0 sonuç arasından 0 ile 0 arasındaki sonuçlar gösteriliyor."
+        },
+        fnCreatedRow:function(row,data,index){
+
+          var my_token = $('#my_token').val();
+          if(selectorForUpdate!=null) {
+            $(row).find(selectorForUpdate).on('click',function(){
+              showguncelle(data);
+            });
+
+            $(row).on('dblclick',function(){
+                showguncelle(data);
+            });
+          }
+
+          if(selectorForDelete!=null) {
+            $(row).find(selectorForUpdate).on('click',function(){
+                if(confirm(jsonParser[row].name + " isimli kullanıcı silmek istediğinizden emin misiniz?")){
+                    $.ajax({
+                        url : window.location + '/delete',
+                        type: 'POST',
+                        data: {'id':jsonParser[row].id, '_token':my_token},
+                        success:function(data){
+                            row.remove();
+                        }, error:function() {
+                            alert('AJAX ERROR!');
+                        }
+                    });
+                }
+            });
+          }
+        }
+    });
+}*/

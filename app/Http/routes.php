@@ -45,7 +45,6 @@ Route::post('/crm/musteri_yonetimi/delete_address','InfoController@destroy');
 Route::post('/crm/musteri_yonetimi/edit_address','InfoController@edit');
 Route::post('/crm/musteri_yonetimi/update_address','InfoController@update');
 
-
 Route::get('crm/kisi_yonetimi', 'Contact\ContactController@index');
 Route::post('crm/kisi_yonetimi/create','Contact\ContactController@create');
 Route::post('crm/kisi_yonetimi/delete','Contact\ContactController@destroy');
@@ -53,6 +52,7 @@ Route::post('crm/kisi_yonetimi/edit','Contact\ContactController@edit');
 Route::post('crm/kisi_yonetimi/update','Contact\ContactController@update');
 Route::any('crm/kisi_yonetimi/autocompleteName', 'Contact\ContactController@autocompleteName');
 Route::any('crm/kisi_yonetimi/autocompleteSurname', 'Contact\ContactController@autocompleteSurname');
+Route::post('crm/kisi_yonetimi/firma_ekle', 'Contact\ContactController@addContactFirm');
 
 Route::get('crm/ebulten_yonetimi', 'Bulletin\BulletinController@index');
 Route::post('crm/ebulten_yonetimi/create','Bulletin\BulletinController@create');

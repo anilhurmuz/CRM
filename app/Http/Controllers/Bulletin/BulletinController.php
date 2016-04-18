@@ -6,7 +6,11 @@ use App\Document;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
+use Validator;
+use Redirect;
+use Session;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class BulletinController extends Controller {
 
@@ -30,26 +34,42 @@ class BulletinController extends Controller {
 
 	public function create(Request $request)
 	{
-		$input = $request->all();
-		$type = $input['type'];
-		if($type=='document') {
-			$url = $input['url2'];
-			$request->request->add(['url'=>$url]);
-			$input = $request->all();
-			$affected = Document::create($input);
-			$id = $affected->getAttribute('id');
-			$request->request->add(['documentid'=>$id]);
-			$input = $request->all();
-			Bulletin::create($input);
-		} else if($type=='text') {
-			$affected = Document::create($input);
-			$id = $affected->getAttribute('id');
-			$request->request->add(['documentid'=>$id]);
-			$input = $request->all();
-			Bulletin::create($input);
+		 // getting all of the post data
+		$file = array('document' => $request->file('url'));
+		// setting up rules
+		$rules = array('document' => 'required',); //mimes:jpeg,bmp,png and for max size max:10000
+		 // doing the validation, passing post data, rules and the messages
+		$validator = Validator::make($file, $rules);
+		if($validator->fails()) {
+			 // send back to the page with the input data and errors
+			return redirect('crm/ebulten_yonetimi')->withInput()->withErrors($validator);
+		} else {
+			// checking file is valid.
+			if($request->file('url')->isValid()) {
+
+				$destinationPath = $request->get('type'); // upload path
+				$fileName = $request->file('url')->getClientOriginalName();  // renameing image
+				$path = $request->file('url')->move($destinationPath, $fileName); // uploading file to given path
+				// create Document Object
+				$document = new Document;
+				$document->type = $request->get('type');
+				$document->url = $path->getRealPath();
+				$document->xcmpcode = $request->get('xcmpcode');
+				$document->save();
+				//create Bulletin Object
+				$bulletin = new Bulletin;
+				$bulletin->name = $request->get('name');
+				$bulletin->todate = $request->get('todate');
+				$bulletin->documentid = $document->id;
+				$bulletin->xcmpcode = $request->get('xcmpcode');
+				$bulletin->save();
+			} else {
+				 // sending back with error message.
+				Session::flash('error', 'uploaded file is not valid!');
+				return redirect('crm/ebulten_yonetimi');
+			}
 		}
 		return redirect('crm/ebulten_yonetimi');
-
 	}
 	/**
 	 * Store a newly created resource in storage.
@@ -101,10 +121,26 @@ class BulletinController extends Controller {
 	{
 		//Get all inputs
 		$input = $request->all();
-		//Update Name, Date, Type Fields
-		Bulletin::where('id','=',$input['id'])->update(['name'=>$input['name'], 'todate'=>$input['todate']]);
-		$bulletin = Bulletin::where('id','=',$input['id'])->first();
-		Document::where('id','=',$bulletin->documentid)->update(['type'=>$input['type']]);
+		//file işlemleri
+		if($request->file('url')!=null) {
+			if($request->file('url')->isValid()) {
+				$destinationPath = $request->get('type'); // upload path
+				$fileName = $request->file('url')->getClientOriginalName();  // renameing image
+				$path = $request->file('url')->move($destinationPath, $fileName); // uploading file to given path
+				//Update Name, Date, Type Fields
+				Bulletin::where('id','=',$input['id'])->update(['name'=>$input['name'], 'todate'=>$input['todate']]);
+				$bulletin = Bulletin::where('id','=',$input['id'])->first();
+				Document::where('id','=',$bulletin->documentid)->update(['type'=>$input['type'], 'url'=>$path->getRealPath()]);
+			} else {
+				Session::flash('error', 'uploaded file is not valid!');
+				return redirect('crm/ebulten_yonetimi');
+			}
+		} else {
+			//Update Name, Date, Type Fields
+			Bulletin::where('id','=',$input['id'])->update(['name'=>$input['name'], 'todate'=>$input['todate']]);
+			$bulletin = Bulletin::where('id','=',$input['id'])->first();
+			Document::where('id','=',$bulletin->documentid)->update(['type'=>$input['type']]);
+		}
 		//Update if rows are not checked
 		if($request->get('contactId') == null) {
 			$ids = Bulletin_List::where('bulletinid','=',$input['id'])->get();
@@ -117,17 +153,18 @@ class BulletinController extends Controller {
 				$check = Bulletin_List::where('parentid','=',$contact)
 					->first();
 				if ($check == null) {
-					$user = DB::table('info')->where('parentid',$contact)->first();
-					$request->request->add(['bulletinid'=>$input['id'], 'parenttype'=>$user->parenttype, 'parentid'=>$contact]);
+					$request->request->add(['bulletinid'=>$input['id'], 'parenttype'=>'contact', 'parentid'=>$contact]);
 					$input = $request->all();
 					Bulletin_List::create($input);
 					//Notification
 					$userName = DB::table('contacts')->where('id', $contact)->first();
-					$getAccountId = Accounts_Contacts::where('contactid','=',$userName->id)->first();
-					$firmName = Account::where('id','=',$getAccountId->accountid)->first();
+					$getAccountId = DB::table('accounts_contacts')->where('contactid','=',$userName->id)->first();
+					$firmName = DB::table('accounts')->where('id','=',$getAccountId->accountid)->first();
+					$documentid = DB::table('bulletins')->where('id','=',$input['id'])->first();
+					$data = Document::where('id','=',$documentid->documentid)->first();
 					DB::table('messages')->insert(
 						['fromsys' => 'user_module', 'tosys' => 'user_module', 'fromdetail' => $firmName->name, 'todetail' => $userName->name, 'actiondate' => $input["todate"],
-							'status' => '0', 'datamessage' => 'This is test data.', 'application' => '1', 'company' => '2']
+							'status' => '0', 'datamessage' => $data->url, 'application' => '1', 'company' => '2']
 					);
 				}
 			}

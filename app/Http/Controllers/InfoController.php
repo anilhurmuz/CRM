@@ -87,8 +87,9 @@ class InfoController extends Controller {
 
 		$rowInfo = Info::find($infoid);
 
-
-		return  view('pages.crm.musteri_yonetimi.address_edit_modal')->with('customerInfo',$customerInfo)->with('rowInfo',$rowInfo);
+		return  view('pages.crm.musteri_yonetimi.address_edit_modal')
+			->with('customerInfo',$customerInfo)
+			->with('rowInfo',$rowInfo);
 	}
 
 	/**

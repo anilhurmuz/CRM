@@ -11,7 +11,7 @@
     @parent
     <div id="ekle" class="tab-pane panel-body">
         <form name="form_bulletin_add" id="form_bulletin_add" class="form-horizontal tasi-form center-block"
-              data-toggle="validator" role="form" method="post"
+              data-toggle="validator" role="form" method="post" enctype="multipart/form-data"
               action="{{Request::root()}}/crm/ebulten_yonetimi/create">
             <input type="hidden" name="_token" id="my_token" value="<?= csrf_token();?>">
             <input type="hidden" name="xcmpcode" id="xcmpcode" value="{!! $xcmpcode !!}">
@@ -66,7 +66,7 @@
                         <div class="col-sm-1 control-label width-150">
                             <div>
 
-                                <input name="url2" type="file" id="add_bulletin_file" class="default" >
+                                <input name="url" type="file" id="add_bulletin_file" class="default" >
 
                             </div>
                         </div>

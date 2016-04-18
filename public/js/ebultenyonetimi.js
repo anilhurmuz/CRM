@@ -230,7 +230,6 @@ function showguncelle(rowData){
             $('#div_kisi_güncelle-' + id + ' #update_bulletin_name').val(rowData.name);
             $('#div_kisi_güncelle-' + id + ' #update_bulletin_date').val(rowData.todate);
             $('#div_kisi_güncelle-' + id + ' #update_bulletin_type').val(rowData.type);
-            $('#div_kisi_güncelle-' + id + ' #update_bulletin_file').val(rowData.url);
         },
         error: function () {
             alert('ajax error!');

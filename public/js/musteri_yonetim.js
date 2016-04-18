@@ -81,11 +81,6 @@ function showguncelle(rowData){
     });
 }
 
-function forIFrame(rowData) {
-
-
-}
-
 function insertDataToListe(dataset) {
 
     $('#musteri_listele_tablo').DataTable( {
@@ -235,13 +230,15 @@ function insertIletisimToListe(dataset, tableId) {
 
                         var parentid = data['parentid'];
                         var rowId = data['id'];
+                        var type = data['parenttype'];
+                        console.log(type);
 
-                        $('#modals-'+ parentid).html(htmlData);
-                        $('#modalAccountAddressEdit-'+parentid).modal('show');
+                        $('body').append(htmlData);
+                        $('#modalAccountAddressEdit-'+type+"-"+parentid).modal('show');
                         $('#info_type-'+rowId).val(data['type']);
                         $('#info_status-'+rowId).val(data['status']);
                         //its to set selected city & county to the options.
-                        onCityCountyUpdate('info_citycode-'+rowId, 'info_countycode-'+rowId,data['cityid'],data['countyid']);
+                        onCityCountyUpdate('info_citycode-'+type+"-"+rowId, 'info_countycode-'+type+"-"+rowId,data['cityid'],data['countyid']);
                     }
                 });
             });
@@ -429,7 +426,7 @@ $(document).ready(function() {
 
 function onCityClick(selectCityId,rowCityId){
     var my_token = $('#my_token').val();
-    var selectCity = $('#'+selectCityId);
+    var selectCity = $('.'+selectCityId);
     var selected ="";
     $.ajax({
         url : window.location + '/fill_city_county',
@@ -451,8 +448,8 @@ function onCityClick(selectCityId,rowCityId){
 
 function onCityChanged(selectCityId,selectCountyId,rowCountyId){
     var my_token = $('#my_token').val();
-    var selectCity = $('#'+selectCityId);
-    var selectCounty = $('#'+selectCountyId);
+    var selectCity = $('.'+selectCityId);
+    var selectCounty = $('.'+selectCountyId);
     var selected ="";
 
     selectCounty.html('<option value="" disabled selected>Seçiniz</option>');
@@ -479,7 +476,7 @@ function onCityChanged(selectCityId,selectCountyId,rowCountyId){
 
 function onCityCountyUpdate(selectCityId,selectCountyId,rowCityId,rowCountyId){
     var my_token = $('#my_token').val();
-    var selectCity = $('#'+selectCityId);
+    var selectCity = $('.'+selectCityId);
     var selected ="";
     $.ajax({
         url : window.location + '/fill_city_county',
@@ -552,7 +549,7 @@ function insertDataToContact(dataset, tableId) {
             var my_token = $('#my_token').val();
 
             $(row).find('.btn-tablo-guncelle').on('click',function(){
-                
+
             });
 
             $(row).find('.btn-tablo-sil').on('click',function(){

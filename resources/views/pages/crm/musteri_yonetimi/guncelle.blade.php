@@ -52,8 +52,8 @@
                     <button data-toggle="dropdown" type="button" name="btn_mus_islem" id="btn_mus_islem"
                             class="btn-add-margin-left btn btn-success"  aria-expanded="false">İşlemler</button>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a data-toggle="modal" onclick="onCityClick('info_citycode',0)" href="#modalAccountAddress-{{$customerInfo['id']}}">Müşteri Adresi Ekleme</a></li>
-                        <li><a data-toggle="modal" href="#modalAccountContact-{{$customerInfo['id']}}" @if($type != 'musteri' ) {!! "style='display: none;'" !!} @endif>Kişi Ekleme</a></li>
+                        <li><a data-toggle="modal" onclick="onCityClick('info_citycode',0)" href="#modalAccountAddress-{{$type}}-{{$customerInfo['id']}}">Müşteri Adresi Ekleme</a></li>
+                        <li><a data-toggle="modal" href="#modalAccountContact-{{$type}}-{{$customerInfo['id']}}" @if($type != 'musteri' ) {!! "style='display: none;'" !!} @endif>Kişi Ekleme</a></li>
 
                     </ul>
                 </div>
@@ -151,7 +151,5 @@
     </div>
 </section>
 
-<div id="modals-{{$customerInfo['id']}}">
 
-</div>
 <!-- Güncelle Alt Tablosu Bitişi -->

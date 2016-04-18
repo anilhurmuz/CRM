@@ -108,10 +108,10 @@ class AccountController extends Controller {
 
 			$tableData = DB::select(DB::raw($sql));
 
-			//contactCekmeKısmıBebeğim
-			$sql = "select c.id,c.name, c.surname, a.status, a.title, c.phone1, c.phone2, c.facebook, c.twitter, c.linkedin, c.description, c.bulletin, ac.name 'account' from accounts_contacts a
-		left outer join contacts c on a.contactid = c.id
-		left outer join accounts ac on a.accountid = ac.id where a.accountid=$id and c.deleted_at is NULL;";
+			//Fill Kişiler Datatable Part
+			$sql = "select c.id, c.name, c.surname, a.status, a.title, c.phone1, c.phone2, c.facebook, c.twitter, c.linkedin, c.description, c.bulletin, ac.name 'account', a.accountid 'accountid' from contacts c
+			left outer join accounts_contacts a on a.contactid = c.id
+			left outer join accounts ac on a.accountid = ac.id where a.accountid=$id and c.deleted_at is NULL and a.id = (SELECT MAX(id) FROM accounts_contacts acs WHERE acs.contactid = c.id);";
 			$record = DB::select($sql);
 		}
 

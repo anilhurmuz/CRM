@@ -1,4 +1,4 @@
- <form name="form_musteri_guncelle" id="form_musteri_guncelle" action="{{Request::root()}}/crm/kisi_yonetimi/update"
+<form name="form_musteri_guncelle" id="form_musteri_guncelle" action="{{Request::root()}}/crm/kisi_yonetimi/update"
           class="form-horizontal tasi-form center-block" method="post">
         <input type="hidden" name="_token" id="my_token" value="<?= csrf_token();?>">
         <input type="hidden" name="xcmpcode" id="xcmpcode" value="{!! $xcmpcode !!}">
@@ -45,8 +45,8 @@
                                 class="form-control input-sm m-bot15"
                                 style="width:200px; float: left;">
                             <option value="" disabled selected>Seçiniz</option>
-                            <option value="worked">Çalışan</option>
-                            <option value="discharged">Ayrılmış</option>
+                            <option value="aktif">Çalışan</option>
+                            <option value="pasif">Ayrılmış</option>
                         </select>
 
                     </div>
@@ -65,13 +65,15 @@
 
                     <div class="col-sm-5">
 
-                        <button type="button" name="btn_kisi_islem" id="btn_kisi_islem"
-                                class="btn-kisi-islem-margin-left btn btn-success" data-toggle="modal"
+                        <button type="button" name="btn_kisi_islem" id="btn_kisi_islem" data-toggle="dropdown"
+                                class="btn-kisi-islem-margin-left btn btn-success" data-toggle="modal" aria-expanded="false"
                                 href="#myModal5"><i
-                                    class="fa fa-plus"></i> İşlemler
+                                    class="fa fa-plus"></i> İşlemler <b class="caret"></b>
                         </button>
-
-
+                        <ul role="menu"  class="dropdown-menu extended inbox">
+                            <div class="notify-arrow notify-arrow-red"></div>
+                            <li><a data-toggle="modal" href="#modalContactCompany-{{$contact}}">Kişi Firma Ekleme</a></li>
+                        </ul>
                     </div>
                 </div>
 
@@ -164,6 +166,72 @@
         </div>
     </form>
 
+ <div class="modal fade modal-dialog-center" id="modalContactCompany-{{$contact}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-sm">
+         <div class="modal-content-wrap">
+             <section class="panel">
+                 <header class="panel-heading tab-bg-dark-navy-grey ">
+                     Kişi Firma Ekleme
+                 </header>
+                 <div class="tab-pane active panel-body">
+                     <form name="form_islem_kisi_firma" id="form_islem_kisi_firma-{{$contact}}"
+                           class="form-horizontal tasi-form center-block">
+                         <input type="hidden" name="_token" id="my_token" value="<?= csrf_token();?>">
+                         <input type="hidden" name="xcmpcode" id="xcmpcode" value="{!! $xcmpcode !!}">
+                         <input type="hidden" name="contactid" value="{{  $contact }}">
+                         <div class="row">
+                             <div class="col-lg-3">
+
+                                 <div class="form-group">
+                                     <label class="col-sm-1 control-label width-150">Firması</label>
+                                     <div class="col-sm-5">
+                                         <select name="account" id="kisi_ekle_contact_account" class="form-control input-sm m-bot15"  style="width:200px; float: left;" required>
+                                             @foreach($firmNames as $firmName)
+                                                 <option value="{{ $firmName->id }}">{{ $firmName->name }}</option>
+                                             @endforeach
+                                         </select>
+                                     </div>
+
+                                 </div>
+                                 <div class="form-group">
+                                     <label class="col-sm-1 control-label width-150">Durumu</label>
+                                     <div class="col-sm-5">
+                                         <select name="status" id="info_status" class="form-control input-sm m-bot15"
+                                                 style="width:200px; float: left;">
+                                             <option value="" disabled selected>Seçiniz</option>
+                                             <option value="aktif">Çalışan</option>
+                                             <option value="pasif">Ayrılmış</option>
+                                         </select>
+
+                                     </div>
+
+                                 </div>
+                                 <div class="form-group">
+                                     <label class="col-sm-1 control-label width-150">Ünvanı</label>
+                                     <div class="col-sm-5">
+                                         <input name="title" id="contact_title" type="text" class="form-control width-200">
+                                     </div>
+
+                                 </div>
+                                 <div class="form-group">
+                                     <label class="col-sm-1 control-label width-150"></label>
+                                     <div class="col-sm-5">
+                                         <button type="button" id="addRow" class="btn btn-success">Ekle </button>
+                                         <button data-dismiss="modal" class="btn btn-danger">Close </button>
+
+                                     </div>
+                                 </div>
+
+                             </div>
+                         </div>
+                     </form>
+                 </div>
+             </section>
+         </div>
+
+     </div>
+ </div>
+
  <section class="panel" style="margin-top: 50px">
      <header class="panel-heading tab-bg-dark-navy-grey ">
          <ul class="nav nav-tabs bold">
@@ -176,14 +244,29 @@
          <div class="tab-content">
              <div id="firms" class="tab-pane active">
 
-                     <table id="kisi-update-table" class="display" width="100%"></table>
+                     <table id="kisi-update-table-{{$contact}}" class="display" width="100%"></table>
 
              </div>
          </div>
      </div>
  </section>
  <script type="text/javascript">
- $(function () {
- getContactInfo({!! $contactInfo !!});
+    $(document).ready(function() {
+
+    getContactInfo({!! $contactInfo !!}, {{ $contact }});
+
+    });
+
+    $('#addRow').on('click', function() {
+     var a = $('#form_islem_kisi_firma-{{$contact}}').serializeArray();
+     $.ajax({
+         url: window.location + '/firma_ekle',
+         type: 'POST',
+         data: a,
+         success: function(data) {
+            getContactInfo(data, {{ $contact }});
+         }
+     });
  });
-</script>
+
+ </script>

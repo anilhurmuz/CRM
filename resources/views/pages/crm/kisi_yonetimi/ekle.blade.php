@@ -57,8 +57,8 @@
                                 class="form-control input-sm m-bot15"
                                 style="width:200px; float: left;" required>
                             <option value="" disabled selected>Seçiniz</option>
-                            <option value="Çalışan">Çalışan</option>
-                            <option value="Ayrılmış">Ayrılmış</option>
+                            <option value="aktif">Çalışan</option>
+                            <option value="pasif">Ayrılmış</option>
                         </select>
                         <div class="help-block with-errors"></div>
                     </div>

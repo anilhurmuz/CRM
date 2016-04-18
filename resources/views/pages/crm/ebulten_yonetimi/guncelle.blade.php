@@ -1,5 +1,5 @@
 <form name="form_bulletin_update" id="form_bulletin_update" class="form-horizontal tasi-form center-block"
-      data-toggle="validator" role="form" method="post"
+      data-toggle="validator" role="form" method="post" enctype="multipart/form-data"
       action="{{Request::root()}}/crm/ebulten_yonetimi/update">
     <input type="hidden" name="_token" id="my_token" value="<?= csrf_token();?>">
     <input type="hidden" name="xcmpcode" id="xcmpcode" value="{!! $xcmpcode !!}">
@@ -50,7 +50,7 @@
             <div class="form-group">
                 <div class="col-sm-1 control-label width-150">
                     <div>
-                        <input type="file" id="update_bulletin_file" class="default">
+                        <input name="url" type="file" id="update_bulletin_file" class="default">
 
                     </div>
                 </div>
@@ -116,4 +116,3 @@
     fillBulletinContactDataTable({!! $data3 !!});
 
 </script>
-

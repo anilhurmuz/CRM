@@ -35,7 +35,7 @@
     <script type="text/javascript">
 
         $(".form_datetime-component").datetimepicker({
-            format: "yyyy-mm-dd  hh:ii",
+            format: "yyyy-mm-dd hh:ii",
             autoclose: true
         });
     </script>

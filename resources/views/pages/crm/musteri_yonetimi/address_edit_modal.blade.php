@@ -1,4 +1,6 @@
-<div class="modal fade modal-dialog-center" id="modalAccountAddressEdit-{{$customerInfo['id']}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+<div id="modals-{{$rowInfo['parenttype']}}-{{$customerInfo['id']}}">
+<div class="modal fade modal-dialog-center" id="modalAccountAddressEdit-{{$rowInfo['parenttype']}}-{{$customerInfo['id']}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="custom-modal-content">
 
@@ -54,8 +56,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-1 control-label width-150 control-label">İl </label>
                                     <div>
-                                        <select name="citycode" id="info_citycode-{{$rowInfo['id']}}"
-                                        onchange="onCityChanged('info_citycode-{{$rowInfo['id']}}','info_countycode-{{$rowInfo['id']}}',0)" class="form-control input-sm m-bot15"
+                                        <select name="citycode" class="info_citycode-{{$rowInfo['parenttype']}}-{{$rowInfo['id']}}"
+                                        onchange="onCityChanged('info_citycode-{{$rowInfo['parenttype']}}-{{$rowInfo['id']}}','info_countycode-{{$rowInfo['parenttype']}}-{{$rowInfo['id']}}',0)" class="form-control input-sm m-bot15"
                                                 style="width:200px; float: left;">
                                             <option value="" disabled selected>Seçiniz</option>
                                         </select>
@@ -65,7 +67,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-1 control-label width-150">İlçe </label>
                                     <div>
-                                        <select name="countycode" id="info_countycode-{{$rowInfo['id']}}"
+                                        <select name="countycode" class="info_countycode-{{$rowInfo['parenttype']}}-{{$rowInfo['id']}}"
                                         class="form-control input-sm m-bot15"
                                                 style="width:200px; float: left;">
                                             <option value="" disabled selected>Seçiniz</option>
@@ -159,4 +161,5 @@
         </div>
 
     </div>
+</div>
 </div>
