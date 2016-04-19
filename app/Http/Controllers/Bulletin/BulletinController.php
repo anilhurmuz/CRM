@@ -47,7 +47,7 @@ class BulletinController extends Controller {
 			// checking file is valid.
 			if($request->file('url')->isValid()) {
 
-				$destinationPath = $request->get('type'); // upload path
+				$destinationPath = 'uploads/'.$request->get('type'); // upload path
 				$fileName = $request->file('url')->getClientOriginalName();  // renameing image
 				$path = $request->file('url')->move($destinationPath, $fileName); // uploading file to given path
 				// create Document Object
@@ -124,7 +124,7 @@ class BulletinController extends Controller {
 		//file işlemleri
 		if($request->file('url')!=null) {
 			if($request->file('url')->isValid()) {
-				$destinationPath = $request->get('type'); // upload path
+				$destinationPath = 'uploads/'.$request->get('type'); // upload path
 				$fileName = $request->file('url')->getClientOriginalName();  // renameing image
 				$path = $request->file('url')->move($destinationPath, $fileName); // uploading file to given path
 				//Update Name, Date, Type Fields

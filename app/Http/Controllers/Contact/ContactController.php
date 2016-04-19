@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use DB;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
+use Session;
 
 class ContactController extends Controller {
 
@@ -117,6 +118,7 @@ class ContactController extends Controller {
 	public function edit(Request $request)
 	{
 		$id = $request->get('data');
+		$reqtype = $request->get('frame');
 
 		$sqlForSpecificContact = "select c.id, c.name, c.surname, c.description, c.phone1, c.phone2, c.facebook, c.twitter, c.linkedin, c.bulletin, a.accountid , a.status, a.title from contacts c left outer join accounts_contacts a on a.contactid=c.id where c.id=$id;";
 		$response = DB::select($sqlForSpecificContact);
@@ -131,7 +133,7 @@ class ContactController extends Controller {
 			->with('data', $response)
 			->with('contactInfo', json_encode($contactInfoFromDatabase))
 			->with('firmNames', $firmNames)
-			->with('contact', $id);
+			->with('contact', $id)->with('reqtype', $reqtype);
 	}
 
 	/**
@@ -144,9 +146,8 @@ class ContactController extends Controller {
 	{
 		$input = $request->all();
 		Contact::where('id','=',$input['id'])->update(['name'=>$input['name'], 'surname'=>$input['surname'], 'description'=>$input['description'], 'bulletin'=>$input['bulletin'], 'phone1'=>$input['phone1'], 'phone2'=>$input['phone2'], 'facebook'=>$input['facebook'], 'twitter'=>$input['twitter'], 'linkedin'=>$input['linkedin']]);
-		$accounts_contactsId = Accounts_Contacts::where('contactid','=',$input['id'])->get();
-		Accounts_Contacts::where('id','=',$accounts_contactsId->id)->update(['accountid'=>$input['account'] ,'status'=>$input['status'], 'title'=>$input['title']]);
-		return redirect('crm/kisi_yonetimi');
+
+		return Response::create(['status'=>200]);
 	}
 
 	/**

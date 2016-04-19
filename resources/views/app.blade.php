@@ -14,6 +14,7 @@
     <!-- Bootstrap core CSS -->
     <link href="{{Request::root()}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{Request::root()}}/css/bootstrap-reset.css" rel="stylesheet">
+    <link href="{{Request::root()}}/css/toastr.css" rel="stylesheet">
     <!--external css-->
     <link href="{{Request::root()}}/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
     <link href="{{Request::root()}}/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css"
@@ -34,7 +35,6 @@
 
     <script src="{{Request::root()}}/js/jquery.js"></script>
     <script src="{{Request::root()}}/js/jquery-1.12.0.min.js"></script>
-
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
@@ -314,6 +314,8 @@
 <script src="{{Request::root()}}/js/common-scripts.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="{{Request::root()}}/js/jquery.dataTables.min.js"></script>
+<script src="{{Request::root()}}/js/toastr.js"></script>
+<script src="{{Request::root()}}/js/toastr-message.js"></script>
 <script>
     $('document').ready(function(){
         $.ajaxSetup({

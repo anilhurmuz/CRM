@@ -151,5 +151,25 @@
     </div>
 </section>
 
+<div class="modal fade modal-dialog-center" id="AccountContactUpdateModal-{{$type}}-{{$customerInfo['id']}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="custom-modal-content">
+
+    <section class="panel">
+      <header class="panel-heading tab-bg-dark-navy-blue ">
+        Müşteri Adresi Güncelleme
+      </header>
+      <div class="tab-pane active panel-body" id="modalAccountContactUpdate-{{$type}}-{{$customerInfo['id']}}">
+
+      </div>
+    </section>
+    <div class="modal-footer">
+      <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+    </div>
+  </div>
+
+</div>
+</div>
+
 
 <!-- Güncelle Alt Tablosu Bitişi -->

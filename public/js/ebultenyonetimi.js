@@ -31,6 +31,7 @@ function createGuncelleTab(id,name,dynamicTabContent,dynamicTabList,htmlData){
 
 }
 
+
 function fillDataToBulletinListDataTable(dataSet) {
 
     $('#bulletin_list_table').DataTable( {

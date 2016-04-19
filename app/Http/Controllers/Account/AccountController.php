@@ -109,7 +109,7 @@ class AccountController extends Controller {
 			$tableData = DB::select(DB::raw($sql));
 
 			//Fill Kişiler Datatable Part
-			$sql = "select c.id, c.name, c.surname, a.status, a.title, c.phone1, c.phone2, c.facebook, c.twitter, c.linkedin, c.description, c.bulletin, ac.name 'account', a.accountid 'accountid' from contacts c
+			$sql = "select c.id, c.name, c.surname, a.status, a.title, c.phone1, c.phone2, c.facebook, c.twitter, c.linkedin, c.description, c.bulletin, ac.name 'account', a.accountid 'accountid', ac.type from contacts c
 			left outer join accounts_contacts a on a.contactid = c.id
 			left outer join accounts ac on a.accountid = ac.id where a.accountid=$id and c.deleted_at is NULL and a.id = (SELECT MAX(id) FROM accounts_contacts acs WHERE acs.contactid = c.id);";
 			$record = DB::select($sql);
@@ -128,7 +128,8 @@ class AccountController extends Controller {
 			$record = null;
 		}
 
-		return view('pages.crm.musteri_yonetimi.guncelle')->with('type',$type)->with('customerInfo',$customer)->with('tableDataAddress',json_encode($tableData))->with('tableDataContact', json_encode($record));
+		return view('pages.crm.musteri_yonetimi.guncelle')->with('type',$type)->with('customerInfo',$customer)->with('tableDataAddress',json_encode($tableData))
+		->with('tableDataContact', json_encode($record))->with('contactId',$id);
 	}
 
 	/**

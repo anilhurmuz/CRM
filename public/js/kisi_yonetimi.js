@@ -31,6 +31,8 @@ function createGuncelleTab(id,name,dynamicTabContent,dynamicTabList,htmlData){
 
 }
 
+
+
 function kisi_searc_toogle(buton){
 
     if(buton.id == 'btn_kisi_search_name')
@@ -95,11 +97,6 @@ function showguncelle(rowData){
             alert('ajax error!');
         }
     });
-
-
-
-
-
 
 }
 

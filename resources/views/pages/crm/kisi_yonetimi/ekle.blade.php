@@ -134,9 +134,9 @@
                                 class="form-control input-sm m-bot15"
                                 style="width:200px; float: left;" required>
                             <option value="" disabled selected>Seçiniz</option>
-                            <option value="evet">Evet</option>
-                            <option value="hayır">Hayır</option>
-                            <option value="reddetti">Kişi Reddetti</option>
+                            <option value="yes">Evet</option>
+                            <option value="no">Hayır</option>
+                            <option value="deny">Kişi Reddetti</option>
                         </select>
                         <div class="help-block with-errors"></div>
                     </div>

@@ -18,6 +18,7 @@ function li_update_close(id){
 
 }
 
+
 function toogle(buton){
 
     if(buton.id == 'btn_islem_acc_name')
@@ -549,8 +550,9 @@ function insertDataToContact(dataset, tableId) {
             var my_token = $('#my_token').val();
 
             $(row).find('.btn-tablo-guncelle').on('click',function(){
-
+                showguncelle2(data);
             });
+
 
             $(row).find('.btn-tablo-sil').on('click',function(){
                 if(confirm(data['name']+" isimli kullanıcı silmek istediğinizden emin misiniz?")){
@@ -570,4 +572,96 @@ function insertDataToContact(dataset, tableId) {
         }
 
     } );
+}
+
+
+
+function showguncelle2(rowData){
+
+    var my_token = $('[name="csrf-token"]').attr('content');
+
+    $.ajax({
+        url :  'http://localhost/CRM/public/crm/kisi_yonetimi/edit',
+        type: 'POST',
+        data: {'data':rowData['id'],'_token':my_token},
+        success:function(data){
+            var id = rowData['id'];
+            //assigns id to the related modals
+            $('.contId').val(id);
+            console.log(id);
+            //brings the Guncelle tab.
+            createGuncelleTab2(rowData['accountid'],rowData['type']);
+            //fills the iframe Guncelle form.
+            $('iframe').load(function() {
+                $('iframe').contents().find('.contId').val(rowData.id);
+                $('iframe').contents().find('#kisi_ekle_contact_name').val(rowData.name);
+                $('iframe').contents().find('#kisi_ekle_contact_surname').val(rowData.surname);
+                $('iframe').contents().find('#kisi_ekle_contact_account').val(rowData.accountid);
+                $('iframe').contents().find('#kisi_ekle_account_contact_status').val(rowData.status);
+                $('iframe').contents().find('#kisi_ekle_account_contact_title').val(rowData.title);
+                $('iframe').contents().find('#kisi_ekle_info_phone1').val(rowData.phone1);
+                $('iframe').contents().find('#kisi_ekle_info_phone2').val(rowData.phone2);
+                $('iframe').contents().find('#kisi_ekle_info_facebook').val(rowData.facebook);
+                $('iframe').contents().find('#kisi_ekle_info_twitter').val(rowData.twitter);
+                $('iframe').contents().find('#kisi_ekle_info_linkedin').val(rowData.linkedin);
+                $('iframe').contents().find('#kisi_ekle_contact_bulletin').val(rowData.bulletin);
+                $('iframe').contents().find('#kisi_ekle_info_description').val(rowData.description);
+            });
+        },
+        error: function () {
+            alert('ajax error!');
+        }
+    });
+}
+
+function createGuncelleTab2(id,type){
+        var my_token = $('[name="csrf-token"]').attr('content');
+
+        var iframe = '<iframe src="http://localhost/CRM/public/crm/kisi_yonetimi/edit?_token='+my_token+'&data='+id+'&frame=1" width="100%" height="1000" frameborder="0" allowtransparency="true" scrolling="no"></iframe>';
+        console.log(id);
+        $('#modalAccountContactUpdate-'+type+'-'+id).html(iframe);
+        $('#AccountContactUpdateModal-'+type+'-'+id).modal('show');
+}
+
+
+function getContactInfo(dataSet, tableId) {
+
+          if ( $.fn.DataTable.isDataTable('#kisi-update-table-' + tableId) ) {
+          $('#kisi-update-table-' + tableId).DataTable().destroy();
+            }
+
+          $('#kisi-update-table-' + tableId).DataTable({
+           data: dataSet,
+           columnDefs: [
+               {
+                   "targets": [0],
+                   "visible": false,
+                   "searchable": false
+                 }
+           ],
+           columns: [
+               {data: "id"},
+               {title: "Firma", data: "name"},
+               {title: "Ünvanı", data: "title"}
+           ],
+           "language": {
+               "lengthMenu": ' <select>'+
+               '<option value="10">10</option>'+
+               '<option value="30">30</option>'+
+               '<option value="50">50</option>'+
+               '<option value="100">100</option>'+
+               '<option value="200">200</option>'+
+               '<option value="500">500</option>'+
+               '<option value="1000">1000</option>'+
+               '<option value="-1">All</option>'+
+               '</select> Kayıt Görüntüle',
+               "sInfo": "Toplam \_TOTAL\_ sonuç arasından \_START\_ ile \_END\_ arasındaki sonuçlar gösteriliyor.",
+               "paginate": {
+                   "next": "İleri",
+                   "previous": "Geri"
+               },
+               "emptyTable": "Tablo içinde görüntülenecek veri bulunamadı",
+               "sInfoEmpty": "Toplam 0 sonuç arasından 0 ile 0 arasındaki sonuçlar gösteriliyor."
+           }
+       });
 }
