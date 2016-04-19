@@ -1,6 +1,5 @@
 <form name="form_bulletin_update" id="form_bulletin_update" class="form-horizontal tasi-form center-block"
-      data-toggle="validator" role="form" method="post" enctype="multipart/form-data"
-      action="{{Request::root()}}/crm/ebulten_yonetimi/update">
+      data-toggle="validator" role="form" enctype="multipart/form-data">
     <input type="hidden" name="_token" id="my_token" value="<?= csrf_token();?>">
     <input type="hidden" name="xcmpcode" id="xcmpcode" value="{!! $xcmpcode !!}">
     <input type="hidden" name="id" class="bulletinId" value="">
@@ -55,7 +54,7 @@
                     </div>
                 </div>
                 <div class="col-sm-5">
-                    <input name="btn_bulletin_update" id="btn_bulletin_update" type="submit"
+                    <input name="btn_bulletin_update" id="btn_bulletin_update" type="button"
                            value="Güncelle" class="btn btn-warning margin-left-100-width">
                 </div>
             </div>
@@ -114,5 +113,21 @@
 
     fillBulletinAddDataTable({!! $data2 !!}, {!! $data4 !!});
     fillBulletinContactDataTable({!! $data3 !!});
+
+    $('#btn_bulletin_update').on('click', function() {
+      var b = $('#form_bulletin_update').serializeArray();
+      $.ajax({
+        url: window.location + '/update',
+        type: 'POST',
+        data: b,
+        success:function(data) {
+            fillBulletinAddDataTable(data.data2, data.data4);
+            toastrMessage("Başarılı!", "Güncelleme işlemi başarıyla tamamlandı!", "success");
+        }, error: function() {
+            toastrMessage("Hata!","İstediğiniz işlem yapılamadı!", "error");
+        }
+      });
+    });
+
 
 </script>

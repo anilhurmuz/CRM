@@ -21,22 +21,30 @@ function li_update_close(id){
 
 function toogle(buton){
 
-    if(buton.id == 'btn_islem_acc_name')
+    if(buton.id == 'btn_islem_acc_name'){
         $("div#search_name").toggle(100);
-    else if(buton.id == 'btn_islem_acc_title')
+        $("#search_span_name").html($("#acc_list_name").val());
+    }
+    else if(buton.id == 'btn_islem_acc_title'){
         $("div#search_title").toggle(100);
-    else if(buton.id == 'btn_islem_acc_status')
+        $("#search_span_title").html($("#acc_list_title").val());
+    }
+
+    else if(buton.id == 'btn_islem_acc_status'){
         $("div#search_status").toggle(100);
-    else if(buton.id == 'btn_islem_acc_industry')
+        $("#search_span_status").html($("#acc_list_status").val());
+    }
+
+    else if(buton.id == 'btn_islem_acc_industry'){
         $("div#search_industry").toggle(100);
-    else if(buton.id == 'btn_islem_acc_type')
+        $("#search_span_industry").html($("#acc_list_industry").val());
+    }
+
+    else if(buton.id == 'btn_islem_acc_type'){
         $("div#search_type").toggle(100);
-    else if(buton.id == 'btn_islem_acc_taxoff')
-        $("div#search_taxoff").toggle(100);
-    else if(buton.id == 'btn_islem_acc_taxno')
-        $("div#search_taxno").toggle(100);
-    else if(buton.id == 'btn_islem_acc_acccode')
-        $("div#search_acccode").toggle(100);
+        $("#search_span_type").html($("#acc_list_type").val());
+    }
+
 
 
 }
@@ -358,31 +366,14 @@ function insertContactsToEditTable(dataset, tableId) {
 
 $(document).ready(function() {
 
-    $('.form-address').on('submit',function(event){
-        alert("deneme");
-        var postData = $(this).serializeArray();
-        var actionURL = $(this).attr('action');
-
-        $.ajax({
-            url : actionURL,
-            type: "POST",
-            data : postData,
-            success:function(data)
-            {
-                alert(data);
-            },
-            error: function(data)
-            {
-                alert('ajax- form-adress error!');
-            }
+        $("#acc_list_name").autocomplete ({
+            source: window.location + '/autocompleteAccListName',
+            minLength: 1
         });
 
-        event.preventDefault(); //STOP default action
-        event.unbind(); //unbind. to stop multiple form submit.
-    });
-
-
-
+        $("#acc_list_title").autocomplete ({
+            source: window.location + '/autocompleteAccListTitle'
+        });
 
 
 

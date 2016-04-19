@@ -39,6 +39,13 @@ Route::post('crm/musteri_yonetimi/delete','Account\AccountController@destroy');
 Route::post('crm/musteri_yonetimi/kisi_ekle','Contact\ContactController@create');
 Route::post('crm/musteri_yonetimi/fill_city_county','Account\AccountController@fillCityCountyBoxes');
 Route::post('crm/musteri_yonetimi/contactDeleteInAccount','Contact\ContactController@destroy');
+
+//autocomplete for listing Accounts under MusteriYonetimi List tab.
+Route::any('crm/musteri_yonetimi/autocompleteAccListName','Account\AccountController@autocompleteAccListName');
+Route::any('crm/musteri_yonetimi/autocompleteAccListTitle','Account\AccountController@autocompleteAccListTitle');
+
+
+
 //adding new address information to the Info table.
 Route::post('/crm/musteri_yonetimi/adres_ekle','InfoController@create');
 Route::post('/crm/musteri_yonetimi/delete_address','InfoController@destroy');

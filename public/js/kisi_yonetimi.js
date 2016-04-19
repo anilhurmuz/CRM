@@ -102,7 +102,7 @@ function showguncelle(rowData){
 
 function insertDataToListe(dataset) {
 
-    $('#kisi_listele_tablo').DataTable( {
+    var table = $('#kisi_listele_tablo').DataTable({
         data: dataset,
         "columnDefs" : [
             {
@@ -172,8 +172,7 @@ function insertDataToListe(dataset) {
 
             });
         }
-
-    } );
+    });
 }
 
 

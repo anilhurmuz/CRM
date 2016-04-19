@@ -322,7 +322,7 @@ $('#addRow').on('click', function() {
       $('#modalContactCompany-{{$contact}}').modal('hide');
       toastrMessage("Başarılı!", "Firma ekleme işlemi başarıyla tamamlandı!", "success");
     }, error: function() {
-      alert('ajax error!');
+      toastrMessage("Hata!","İstediğiniz işlem yapılamadı!", "error");
     }
   });
 });
@@ -335,7 +335,7 @@ $('#btn_kisi_güncelle').on('click', function() {
     success:function(data) {
         toastrMessage("Başarılı!", "Güncelleme işlemi başarıyla tamamlandı!", "success");
     }, error: function() {
-      alert('ajax error!');
+        toastrMessage("Hata!","İstediğiniz işlem yapılamadı!", "error");
     }
   });
 });

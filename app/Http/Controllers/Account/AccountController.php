@@ -212,4 +212,27 @@ class AccountController extends Controller {
 		return response()->json($response);
 	}
 
+	public function autocompleteAccListName(Request $request) {
+
+		$key = $request->get('term');
+		$names = Account::where('name','LIKE',$key.'%')->get();
+
+		foreach($names as $name) {
+			$res[] = array('value'=> $name->name);
+		}
+
+		return json_encode($res);
+	}
+
+	public function autocompleteAccListTitle(Request $request) {
+		$key = $request->get('term');
+		$titles = Account::where('title','LIKE',$key.'%')->get();
+
+		foreach($titles as $title) {
+			$res[] = array('value'=> $title->title);
+		}
+
+		return json_encode($res);
+	}
+
 }

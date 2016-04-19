@@ -100,8 +100,8 @@ class BulletinController extends Controller {
 	{
 		$id = $request->get('data');
 		$response = Bulletin::where('id','=',$id)->first();
-		$sqlForAdd = "select id 'contactId', name, surname from contacts where bulletin='evet' and deleted_at is NULL";
-		$sqlFromContactsForBulletin = "select contacts.name, contacts.surname from contacts, bulletin_list where contacts.bulletin='evet' and bulletin_list.bulletinid = 6 and bulletin_list.deleted_at is NULL and contacts.deleted_at is NULL;";
+		$sqlForAdd = "select id 'contactId', name, surname from contacts where bulletin='yes' and deleted_at is NULL";
+		$sqlFromContactsForBulletin = "select contacts.name, contacts.surname from contacts, bulletin_list where contacts.bulletin='yes' and bulletin_list.bulletinid = 6 and bulletin_list.deleted_at is NULL and contacts.deleted_at is NULL;";
 		$sqlForCheckBox = "select parentid from bulletin_list where bulletinid=$id and deleted_at is NULL";
 		$recordsForAdd = DB::select($sqlForAdd);
 		$recordsFromContactsForBulletin = DB::select($sqlFromContactsForBulletin);
@@ -178,7 +178,13 @@ class BulletinController extends Controller {
 				}
 			}
 		}
-		return redirect('crm/ebulten_yonetimi');
+			$id = $request->get('id');
+			$sqlForAdd = "select id 'contactId', name, surname from contacts where bulletin='yes' and deleted_at is NULL";
+			$sqlForCheckBox = "select parentid from bulletin_list where bulletinid=$id and deleted_at is NULL";
+			$recordsForAdd = DB::select($sqlForAdd);
+			$recordsForCheckBox = DB::select($sqlForCheckBox);
+
+			return response()->json(array("data2"=>$recordsForAdd,"data4"=>$recordsForCheckBox));
 	}
 	/**
 	 * Remove the specified resource from storage.
