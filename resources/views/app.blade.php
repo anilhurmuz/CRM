@@ -32,6 +32,8 @@
     <link href="{{Request::root()}}/css/style-responsive.css" rel="stylesheet"/>
     <link href="{{Request::root()}}/css/jquery.dataTables.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link href="{{Request::root()}}/assets/summernote/dist/summernote.css" rel="stylesheet">
+
 
     <script src="{{Request::root()}}/js/jquery.js"></script>
     <script src="{{Request::root()}}/js/jquery-1.12.0.min.js"></script>

@@ -201,7 +201,8 @@ function getContactInfo(dataSet, tableId) {
                {
                    "targets": [0],
                    "visible": false,
-                   "searchable": false                 }
+                   "searchable": false
+               }
            ],
            columns: [
                {data: "id"},

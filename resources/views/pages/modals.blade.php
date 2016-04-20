@@ -15,12 +15,12 @@
                     </header>
                     <div class="tab-pane active panel-body">
                         <form name="form_islem_müsteri_adresi" data-toggle="validator" role="form" id="form_islem_müsteri_adresi"
-                              class="form-horizontal tasi-form center-block form-address" method="POST" action="{{Request::root()}}/crm/musteri_yonetimi/adres_ekle">
+                              class="form-horizontal tasi-form center-block form-address">
                             <input name="parentid" type="hidden" value="{{$customerInfo['id']}}">
                             <input name="_token" type="hidden" value="<?= csrf_token();?>">
                             <input name="parenttype" type="hidden" value="{{$customerInfo['type']}}">
                             <div class="row">
-                                <div class="col-lg-3">
+                                <div class="col-sm-3">
                                     <div class="form-group control-group">
                                         <label class="col-sm-1 width-150 control-label" >Adres Türü </label>
                                         <div>
@@ -55,7 +55,7 @@
                                     </div>
 
                                 </div>
-                                <div class="col-lg-3">
+                                <div class="col-sm-3">
                                     <div class="form-group">
                                         <label class="col-sm-1 control-label width-150 control-label">İl </label>
                                         <div>
@@ -86,7 +86,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-3">
+                                <div class="col-sm-3">
                                     <div class="form-group">
                                         <label class="col-sm-1 control-label width-150">Telefon-1</label>
                                         <div>
@@ -117,7 +117,7 @@
                                     </div>
 
                                 </div>
-                                <div class="col-lg-3">
+                                <div class="col-sm-3">
                                     <div class="form-group">
                                         <label class="col-sm-1 control-label width-150">Vergi Dairesi</label>
                                         <div class="col-sm-5">
@@ -144,7 +144,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-1 control-label width-150"></label>
                                         <div class="col-sm-5 width-200">
-                                            <button name="btn_islem_musteri_adres_ekle" id="btn_islem_musteri_adres_ekle" type="submit"
+                                            <button name="btn_islem_musteri_adres_ekle" id="btn_islem_musteri_adres_ekle" type="button"
                                                     class="btn-mus-adres-add-margin-left btn btn-success">Ekle
                                             </button>
                                         </div>
@@ -179,7 +179,7 @@
                     </header>
                     <div class="tab-pane active panel-body">
                         <form name="form_kisi_ekle" id="form_kisi_ekle"
-                              class="form-horizontal tasi-form center-block" method="POST" action="{{Request::root()}}/crm/musteri_yonetimi/kisi_ekle">
+                              class="form-horizontal tasi-form center-block">
                             <input name="parentid" type="hidden" value="{{$customerInfo['id']}}">
                             <input name="_token" type="hidden" value="<?= csrf_token();?>">
                             <input name="xcmpcode" type="hidden" value="{{$xcmpcode}}">
@@ -303,7 +303,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-1 control-label width-150"></label>
                                         <div class="col-sm-5 width-200">
-                                            <button name="btn_islem_musteri_adres_ekle" id="btn_islem_musteri_adres_ekle" type="submit"
+                                            <button name="btn_islem_musteri_adres_ekle" id="btn_islem_musteri_kisi_ekle" type="button"
                                                     class="btn-kisi-add-margin-left btn btn-success">Ekle
                                             </button>
                                         </div>
@@ -325,3 +325,36 @@
         </div>
     </div>
 @stop
+<script type="text/javascript">
+    $('body').on('click', '#btn_islem_musteri_adres_ekle', function() {
+        var a = $('#form_islem_müsteri_adresi').serializeArray();
+        console.log(a);
+        $.ajax({
+            url:  'http://localhost/CRM/public/crm/musteri_yonetimi/adres_ekle',
+            type: 'POST',
+            data: a,
+            success: function(data) {
+                toastrMessage("Başarılı!", "Adres ekleme işlemi başarıyla tamamlandı!", "success");
+                $('#modalAccountAddress-{{$type}}-{{$customerInfo['id']}}').modal('hide');
+                insertIletisimToListe(data,'{{$type}}-{{$customerInfo['id']}}');
+            }, error: function() {
+                toastrMessage("Hata!","İstediğiniz işlem yapılamadı!", "error");
+            }
+        });
+    });
+    $('body').on('click', '#btn_islem_musteri_kisi_ekle', function() {
+      var b = $('#form_kisi_ekle').serializeArray();
+      $.ajax({
+        url: 'http://localhost/CRM/public/crm/musteri_yonetimi/kisi_ekle',
+        type: 'POST',
+        data: b,
+        success:function(data) {
+          toastrMessage("Başarılı!", "Kişi ekleme işlemi başarıyla tamamlandı!", "success");
+          $('#modalAccountContact-{{$type}}-{{$customerInfo['id']}}').modal('hide');
+          insertDataToContact(data, '{{$type}}-{{$customerInfo['id']}}');
+        }, error: function() {
+          toastrMessage("Hata!","İstediğiniz işlem yapılamadı!", "error");
+        }
+      });
+    });
+</script>

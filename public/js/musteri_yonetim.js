@@ -172,6 +172,11 @@ function insertDataToListe(dataset) {
 function insertIletisimToListe(dataset, tableId) {
 
 
+    if ( $.fn.DataTable.isDataTable('#account_update_address-' + tableId) ) {
+        $('#account_update_address-' + tableId).DataTable().destroy();
+      }
+
+
 
     $('#account_update_address-'+tableId).DataTable( {
         data: dataset,
@@ -492,6 +497,11 @@ function onCityCountyUpdate(selectCityId,selectCountyId,rowCityId,rowCountyId){
 
 
 function insertDataToContact(dataset, tableId) {
+
+
+    if ( $.fn.DataTable.isDataTable('#account_update_contacts-' + tableId) ) {
+      $('#account_update_contacts-' + tableId).DataTable().destroy();
+    }
 
     $('#account_update_contacts-' + tableId).DataTable( {
         data: dataset,

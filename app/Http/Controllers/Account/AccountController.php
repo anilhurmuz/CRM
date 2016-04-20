@@ -130,6 +130,7 @@ class AccountController extends Controller {
 
 		return view('pages.crm.musteri_yonetimi.guncelle')->with('type',$type)->with('customerInfo',$customer)->with('tableDataAddress',json_encode($tableData))
 		->with('tableDataContact', json_encode($record))->with('contactId',$id);
+		//return response()->json(array("tableDataAddress"=>$recordsForAdd,"data4"=>$recordsForCheckBox));
 	}
 
 	/**

@@ -10,7 +10,7 @@
                 </header>
                 <div class="tab-pane active panel-body">
                     <form name="form_islem_müsteri_adresi" data-toggle="validator" role="form"
-                          class="form-horizontal tasi-form center-block form-address" method="POST" action="{{Request::root()}}/crm/musteri_yonetimi/update_address">
+                          class="form-horizontal tasi-form center-block form-address">
                         <input name="parentid" type="hidden" value="{{$customerInfo['id']}}">
                         <input name="_token" type="hidden" value="<?= csrf_token();?>">
                         <input name="id" type="hidden" value="{{$rowInfo['id']}}">
@@ -141,8 +141,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-1 control-label width-150"></label>
                                     <div class="col-sm-5 width-200">
-                                        <button name="btn_islem_musteri_adres_ekle"  type="submit"
-                                                class="btn-mus-adres-add-margin-left btn btn-success">Güncelle
+                                        <button name="btn_islem_musteri_adres_ekle"  type="button"
+                                                class="btn-mus-adres-add-margin-left btn btn-success" id="btn_islem_musteri_adres_ekle">Güncelle
                                         </button>
                                     </div>
                                 </div>
@@ -159,7 +159,24 @@
                 <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
             </div>
         </div>
-
     </div>
 </div>
 </div>
+
+<script type="text/javascript">
+        $('body').on('click','#btn_islem_musteri_adres_ekle', function() {
+            var a = $('#form_islem_müsteri_adresi').serializeArray();
+            console.log(a);
+            $.ajax({
+                url:  'http://localhost/CRM/public/crm/musteri_yonetimi/edit_address',
+                type: 'POST',
+                data: a,
+                success: function(data) {
+                    toastrMessage("Başarılı!", "Güncelleme işlemi başarıyla tamamlandı!", "success");
+                    $('#modalAccountAddressEdit-{{$rowInfo['parenttype']}}-{{$customerInfo['id']}}').modal('hide');
+                }, error: function() {
+                    toastrMessage("Hata!","İstediğiniz işlem yapılamadı!", "error");
+                }
+            });
+        });
+</script>

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Lead;
 use App\Info;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use DB;
 
 class InfoController extends Controller {
 
@@ -28,7 +30,7 @@ class InfoController extends Controller {
 	{
 
 		$parentType = $request->get('parenttype');
-
+		$id = $request->get('parentid');
 
 		if($parentType == "musteri"){
 			$request['parenttype'] = "account";
@@ -40,8 +42,30 @@ class InfoController extends Controller {
 		$input = $request->all();
 		$affected = Info::create($input);
 
+		//if type is account, informaitons will be taken from account table
+		if($parentType == "musteri"){
+			$customer = Account::find($id);
+			$sql = "select info.id,info.parentid,info.parenttype,info.type,info.status,info.address ,iller.name citycode, ilceler.name countycode, info.citycode cityid, info.countycode countyid,info.zipcode,info.phone1,info.phone2,info.web,info.taxoff,info.taxno,info.acccode
+					from info
+					left outer join iller on iller.id=info.citycode
+					left outer join ilceler on ilceler.id=info.countycode
+					where info.parentid = $id and info.parenttype = 'account' and info.deleted_at is null";
 
-		return redirect('crm/musteri_yonetimi');
+			$tableData = DB::select(DB::raw($sql));
+		}
+
+		//if type is lead, informaitons will be taken from lead table
+		else{
+			$customer = Lead::find($id);
+			$sql = "select info.id,info.parentid,info.parenttype,info.type,info.status,info.address ,iller.name citycode, ilceler.name countycode, info.citycode cityid, info.countycode countyid, info.zipcode,info.phone1,info.phone2,info.web,info.taxoff,info.taxno,info.acccode
+					from info
+					left outer join iller on iller.id=info.citycode
+					left outer join ilceler on ilceler.id=info.countycode
+					where info.parentid = $id and info.parenttype = 'lead' and info.deleted_at is null";
+			$tableData = DB::select(DB::raw($sql));
+		}
+
+		return response()->json($tableData);
 	}
 
 	/**

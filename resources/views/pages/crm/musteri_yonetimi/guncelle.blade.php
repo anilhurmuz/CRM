@@ -14,7 +14,7 @@
 
 
 <form name="form_musteri_guncelle" id="form_musteri_guncelle"
-      class="form-horizontal tasi-form center-block" method="post" action="{{Request::root()}}/crm/musteri_yonetimi/update">
+      class="form-horizontal tasi-form center-block">
     <input type="hidden" name="_token" id="my_token" value="<?= csrf_token();?>">
     <input type="hidden" name="xcmpcode" id="xcmpcode" value="{!! $xcmpcode !!}">
     <input type="hidden" name="id" id="guncelle_acc_id" value="{{$customerInfo['id']}}">
@@ -87,7 +87,7 @@
             <div class="form-group">
                 <label class="col-sm-1 control-label width-150"></label>
                 <div class="col-sm-5">
-                    <button name="btn_mus_güncelle" id="btn_mus_güncelle" type="submit"
+                    <button name="btn_mus_güncelle" id="btn_mus_güncelle" type="button"
                             class="btn-add-margin-left btn btn-warning">
                         Güncelle
                     </button>
@@ -142,6 +142,21 @@
                     @if($tableDataContact !=null)
                     insertDataToContact({!!$tableDataContact!!}, '{{$type}}-{{$customerInfo['id']}}');
                     @endif
+
+                    $('#btn_mus_güncelle').on('click', function() {
+                        var a = $('#form_musteri_guncelle').serializeArray();
+                        console.log(a);
+                        $.ajax({
+                            url:  'http://localhost/CRM/public/crm/musteri_yonetimi/update',
+                            type: 'POST',
+                            data: a,
+                            success: function(data) {
+                                toastrMessage("Başarılı!", "Güncelleme işlemi başarıyla tamamlandı!", "success");
+                            }, error: function() {
+                                toastrMessage("Hata!","İstediğiniz işlem yapılamadı!", "error");
+                            }
+                        });
+                    });
                 </script>
             </div>
 

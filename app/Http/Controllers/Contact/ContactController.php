@@ -51,7 +51,14 @@ class ContactController extends Controller {
 		$input = $request->all();
 		Accounts_Contacts::create($input);
 
-		return redirect('crm/kisi_yonetimi');
+		//Fill Kişiler Datatable Part
+		$accountid = $input['accountid'];
+		$sql = "select c.id, c.name, c.surname, a.status, a.title, c.phone1, c.phone2, c.facebook, c.twitter, c.linkedin, c.description, c.bulletin, ac.name 'account', a.accountid 'accountid', ac.type from contacts c
+		left outer join accounts_contacts a on a.contactid = c.id
+		left outer join accounts ac on a.accountid = ac.id where a.accountid=$accountid and c.deleted_at is NULL and a.id = (SELECT MAX(id) FROM accounts_contacts acs WHERE acs.contactid = c.id);";
+		$record = DB::select($sql);
+
+		return response()->json($record);
 	}
 
 	/**

@@ -67,6 +67,11 @@ Route::post('crm/ebulten_yonetimi/delete','Bulletin\BulletinController@destroy')
 Route::post('crm/ebulten_yonetimi/edit','Bulletin\BulletinController@edit');
 Route::post('crm/ebulten_yonetimi/update','Bulletin\BulletinController@update');
 
+Route::get('crm/satis_firsati_yonetimi', 'Opportunity\OpportunityController@index');
+Route::post('crm/satis_firsati_yonetimi/create', 'Opportunity\OpportunityController@create');
+Route::post('crm/satis_firsati_yonetimi/edit', 'Opportunity\OpportunityController@edit');
+Route::post('crm/satis_firsati_yonetimi/update', 'Opportunity\OpportunityController@update');
+Route::post('crm/satis_firsati_yonetimi/delete', 'Opportunity\OpportunityController@destroy');
 
 
 Route::get('crm/{page}','PagesController@index');
