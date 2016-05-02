@@ -9,7 +9,12 @@
 .width-300{
     width:300px;
 }
-
+.width-250{
+    width:230px;
+}
+.width-400{
+    width:400px;
+}
 .right{
     float: right;
 }
@@ -142,12 +147,14 @@
     position: relative;
 }
 
-.width-250{
-    width:230px;
-}
+
 .margin-left-100-width{
     margin-left: 100px;
     position: fixed;
+    width: 100px;
+}
+.btn_bulletin_add_margin{
+    float: right;
     width: 100px;
 }
 

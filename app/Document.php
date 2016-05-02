@@ -12,6 +12,6 @@ class Document extends Model {
 
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['type', 'url', 'expdate', 'categoryid', 'subcategoryid', 'status', 'revision', 'parenttype', 'parentid','xcmpcode','createduser','updateduser','created_at','updated_at'];
+    protected $fillable = ['type', 'name', 'url', 'expdate', 'categoryid', 'subcategoryid', 'status', 'revision', 'parenttype', 'parentid','xcmpcode','createduser','updateduser','created_at','updated_at'];
 
 }

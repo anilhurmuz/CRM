@@ -318,6 +318,10 @@
 <script src="{{Request::root()}}/js/jquery.dataTables.min.js"></script>
 <script src="{{Request::root()}}/js/toastr.js"></script>
 <script src="{{Request::root()}}/js/toastr-message.js"></script>
+<script src="{{Request::root()}}/js/notify.min.js"></script>
+<script src="{{Request::root()}}\js\jquery.form.js"></script>
+<script src="{{Request::root()}}\js\jquery.validate.min.js"></script>
+
 <script>
     $('document').ready(function(){
         $.ajaxSetup({

@@ -11,7 +11,7 @@ class Bulletin extends Model {
 
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['name', 'todate', 'documentid','xcmpcode','createduser','updateduser','created_at','updated_at'];
+    protected $fillable = ['name', 'startdate', 'enddate', 'type', 'description','xcmpcode','createduser','updateduser','created_at','updated_at'];
 
 
 }
